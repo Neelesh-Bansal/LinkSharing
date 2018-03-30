@@ -2,7 +2,7 @@
 grails:
     profile: web
     codegen:
-        defaultPackage: Grails_app
+        defaultPackage: linksharingapp
     gorm:
         reactor:
             # Whether to translate GORM events into Reactor events
