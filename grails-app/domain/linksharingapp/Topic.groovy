@@ -1,10 +1,11 @@
 package linksharingapp
 
-import java.beans.Visibility
+import enumeration.Visibility
 
 class Topic {
 
     String name
+    User createdBy
     static belongsTo = [createdBy:User]
     Date dateCreated
     Date lastUpdated
