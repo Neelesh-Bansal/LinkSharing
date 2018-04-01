@@ -6,9 +6,10 @@ class Subscription {
 
     Topic topic
     User user
+    Seriousness seriousness
     Date dateCreated
     Date lastUpdated
-    Seriousness seriousness
+
 
     static belongsTo = [user:User, topic:Topic]
 
