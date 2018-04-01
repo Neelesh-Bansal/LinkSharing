@@ -10,4 +10,11 @@ class LinkResource extends Resource {
         url(url: true)
     }
 
+
+    @Override
+    public String toString() {
+        return "LinkResource{" +
+                "url='" + url + '\'' +
+                '}';
+    }
 }

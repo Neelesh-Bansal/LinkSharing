@@ -19,6 +19,20 @@ class TopicSpec extends Specification implements DomainUnitTest<Topic> {
     }
 
 
+    def "validating toString method"(){
+
+        setup:
+
+        User user = new User(email: "neelesh@ttn.com",username: "neelesh.bansal",password: "abc123",firstName: "neelesh",lastName: "bansal")
+        Topic topic = new Topic(name: "Topic1",createdBy: user,visibility: Visibility.PUBLIC)
+        when:
+        topic.save()
+
+        then:
+        topic.toString() == "Topic{name='${topic.name}'}"
+    }
+
+
     void "Validating Topic constraints"(){
 
         setup:

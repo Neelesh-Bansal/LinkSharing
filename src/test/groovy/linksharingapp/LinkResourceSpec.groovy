@@ -1,5 +1,6 @@
 package linksharingapp
 
+import enumeration.Visibility
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
@@ -14,6 +15,21 @@ class LinkResourceSpec extends Specification implements DomainUnitTest<LinkResou
     void "test something"() {
         expect:"fix me"
             true == false
+    }
+
+
+    def "validating toString method"(){
+
+        setup:
+
+        User user = new User(email: "neelesh@ttn.com",username: "neelesh.bansal",password: "abc123",firstName: "neelesh",lastName: "bansal")
+        Topic topic = new Topic(name: "Topic1",createdBy: user,visibility: Visibility.PUBLIC)
+        when:
+        Resource linkResource = new LinkResource(url: "https://www.google.com",description: 'Hello from Topic1',createdBy: user,topic: topic)
+        linkResource.save()
+
+        then:
+        linkResource.toString() == "LinkResource{url='${linkResource.url}'}"
     }
 
 
