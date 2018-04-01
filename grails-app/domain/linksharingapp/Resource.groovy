@@ -10,6 +10,7 @@ abstract class Resource {
 
     static belongsTo = [createdBy:User, topic:Topic]
 
+    static hasMany = [ratings:ResourceRating, readingItems:ReadingItem]
 
     static constraints = {
 

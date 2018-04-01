@@ -97,4 +97,16 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
         then:
         user2.count() == 1
     }
+
+
+    void "validating name"(){
+        setup:
+        User user1 = new User(email: "neelesh@TTN.com",userName: "neelesh.bansal",password: "abc123",firstName: "neelesh",lastName: "bansal")
+
+        when:
+        user1.save()
+
+        then:
+        user1.getName() == "neelesh bansal"
+    }
   }
