@@ -1,4 +1,4 @@
-package linksharing
+package linksharingapp
 
 class UrlMappings {
 
@@ -10,7 +10,7 @@ class UrlMappings {
         }
 
        // "/"(view:"/index")
-        "/"(view:"/login/index")
+        "/"(controller: 'login', action: 'home')
         "500"(view:'/error')
         "404"(view:'/notFound')
     }

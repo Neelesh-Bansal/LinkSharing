@@ -1,6 +1,6 @@
 package linksharingapp
 
-import enumeration.Seriousness;
+import linksharingapp.enumeration.Seriousness;
 
 class Subscription {
 

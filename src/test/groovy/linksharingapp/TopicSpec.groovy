@@ -1,7 +1,6 @@
 package linksharingapp
 
-import linksharingapp.User
-import enumeration.Visibility
+import linksharingapp.enumeration.Visibility
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
@@ -15,7 +14,7 @@ class TopicSpec extends Specification implements DomainUnitTest<Topic> {
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 
 

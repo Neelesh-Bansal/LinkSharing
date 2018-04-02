@@ -1,7 +1,7 @@
 package linksharing
 
-import enumeration.Seriousness
-import enumeration.Visibility
+import linksharingapp.enumeration.Seriousness
+import linksharingapp.enumeration.Visibility
 import grails.util.Holders
 import linksharingapp.DocumentResource
 import linksharingapp.LinkResource
@@ -11,7 +11,7 @@ import linksharingapp.ResourceRating
 import linksharingapp.Subscription
 import linksharingapp.User
 import linksharingapp.Topic
-import Constants.DefaultPassword
+import linksharingapp.constants.DefaultPassword
 
 
 class BootStrap {
@@ -131,6 +131,7 @@ class BootStrap {
         admin.setFirstName("neelesh")
         admin.setLastName("bansal")
         admin.setPassword(DefaultPassword.defaultPassword)
+        admin.setConfirmPassword(DefaultPassword.defaultPassword)
         admin.setUsername("neeleshbansal")
         admin.setActive(true)
         admin.setAdmin(true)
@@ -148,6 +149,7 @@ class BootStrap {
         normal.setFirstName("sankalp")
         normal.setLastName("jain")
         normal.setPassword("normal12")
+        normal.setConfirmPassword("normal12")
         normal.setUsername("jsankalp")
         normal.setActive(true)
         normal.setAdmin(false)

@@ -1,4 +1,4 @@
-package linksharing
+package linksharingapp
 
 import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification

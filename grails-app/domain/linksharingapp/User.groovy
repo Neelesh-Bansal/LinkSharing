@@ -6,6 +6,7 @@ class User {
     String email
     String username
     String password
+    String confirmPassword
     String firstName
     String lastName
     byte photo
@@ -23,15 +24,19 @@ class User {
     static constraints = {
         email(unique: true, email: true, nullable: false)
         username(unique: true, nullable: false)
-        password(blank: false, minSize: 5, nullable: false)
+        confirmPassword(nullable: true,blank: true)
         firstName(blank: false, nullable: false)
         lastName(blank: false, nullable: false)
         photo(nullable: true, sqlType: 'longblob')
         admin(nullable: true)
         active(nullable: true)
+        password(nullable: false,blank: false,minSize: 5 ,validator: { password, obj ->
+            def newPassword = obj.confirmPassword
+            password == newPassword ? true : ['invalid.passwordmismatch']
+        })
 
     }
-    static transients = ['name']
+    static transients = ['name','confirmPassword']
 
 
     @Override

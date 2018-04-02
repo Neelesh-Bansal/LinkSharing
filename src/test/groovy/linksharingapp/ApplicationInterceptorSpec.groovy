@@ -1,4 +1,4 @@
-package linksharing
+package linksharingapp
 
 import grails.testing.web.interceptor.InterceptorUnitTest
 import spock.lang.Specification

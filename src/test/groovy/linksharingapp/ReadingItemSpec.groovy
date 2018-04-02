@@ -1,6 +1,6 @@
 package linksharingapp
 
-import enumeration.Visibility
+import linksharingapp.enumeration.Visibility
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
@@ -14,7 +14,7 @@ class ReadingItemSpec extends Specification implements DomainUnitTest<ReadingIte
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 
 

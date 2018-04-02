@@ -1,4 +1,4 @@
-package linksharing
+package linksharingapp
 
 
 class ApplicationInterceptor {
@@ -8,8 +8,10 @@ class ApplicationInterceptor {
     }
 
     boolean before() {
-        if (!session.user)
+        log.error("Controller ${controllerName} , Action ${actionName}")
+        if(controllerName !="login" && !session.user)
         {
+            log.error("Unauthorized User.")
             flash.error= "session.user doesn't exist"
             return false
         }

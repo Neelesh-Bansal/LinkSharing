@@ -1,7 +1,7 @@
 package linksharingapp
 
-import enumeration.Visibility
-import enumeration.Seriousness
+import linksharingapp.enumeration.Visibility
+import linksharingapp.enumeration.Seriousness
 class Topic {
 
     String name

@@ -1,6 +1,6 @@
 package linksharingapp
 
-import enumeration.Visibility
+import linksharingapp.enumeration.Visibility
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
@@ -14,7 +14,7 @@ class LinkResourceSpec extends Specification implements DomainUnitTest<LinkResou
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 
 

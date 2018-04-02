@@ -5,7 +5,7 @@
 
 <body>
 <div class="container">
-<g:form controller="login" action="loginHandler" method="post">
+<g:form controller="login" action="loginHandler" method="POST">
 
         <label>Username</label>
         <input class="form-control" type="text" name="username" placeholder="Enter Your Username">
@@ -14,7 +14,8 @@
         <input class="form-control" type="password" name="password" placeholder="Enter Your Password">
 
         <p><a href="#">Forgot Password</a></p>
-        <input type="submit" class="form-control btn-primary" style="background:blue">
+        <g:submitButton name="button" value="Login"/>
+        %{--<input type="submit" class="form-control btn-primary" style="background:blue">--}%
 </g:form>
 </div>
 

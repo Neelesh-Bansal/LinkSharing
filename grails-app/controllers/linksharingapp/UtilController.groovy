@@ -1,4 +1,4 @@
-package linksharing
+package linksharingapp
 
 class UtilController {
 

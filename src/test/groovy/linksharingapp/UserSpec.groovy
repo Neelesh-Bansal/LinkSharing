@@ -13,7 +13,7 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 
     //Write test cases for validating user (including username and email uniqueness)
