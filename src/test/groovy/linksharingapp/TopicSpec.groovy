@@ -2,6 +2,7 @@ package linksharingapp
 
 import linksharingapp.enumeration.Visibility
 import grails.testing.gorm.DomainUnitTest
+import org.omg.CORBA.PUBLIC_MEMBER
 import spock.lang.Specification
 
 class TopicSpec extends Specification implements DomainUnitTest<Topic> {
@@ -17,6 +18,14 @@ class TopicSpec extends Specification implements DomainUnitTest<Topic> {
             true == true
     }
 
+    def "validating stringToEnum Method"(){
+        User user = new User(email: "neelesh@ttn.com",username: "neelesh.bansal",password: "abc123",firstName: "neelesh",lastName: "bansal")
+        when:
+        Topic topic = new Topic(name: "Topic1",createdBy: user,visibility: Visibility.PUBLIC)
+
+        then:
+        Visibility.stringToEnum("PUBLIC")==Visibility.PUBLIC
+    }
 
     def "validating toString method"(){
 

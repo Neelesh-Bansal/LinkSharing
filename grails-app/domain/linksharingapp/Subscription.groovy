@@ -6,7 +6,7 @@ class Subscription {
 
     Topic topic
     User user
-    Seriousness seriousness
+    Seriousness seriousness = Seriousness.SERIOUS
     Date dateCreated
     Date lastUpdated
 
@@ -18,5 +18,10 @@ class Subscription {
         user(nullable: false,unique: 'topic')
         topic(nullable: false)
         seriousness(nullable: false)
+    }
+
+    static mapping = {
+        user fetch: 'join'
+        topic fetch: 'join'
     }
 }

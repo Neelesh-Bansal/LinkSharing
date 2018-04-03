@@ -36,6 +36,11 @@ class User {
         })
 
     }
+
+    static mapping = {
+        sort id: 'desc'
+    }
+
     static transients = ['name','confirmPassword']
 
 
