@@ -6,7 +6,9 @@ class LoginController {
 
     def home(){
         println("Home.....")
-        render (view: 'index')
+        List<Resource> resources1 = Resource.topPost()
+        List<Resource> resources2 = Resource.recentShares()
+        render (view: 'index', model: [resourceList1:resources1,resourceList2:resources2])
     }
 
     def index() {
@@ -33,7 +35,7 @@ class LoginController {
         }
         else{
             flash.error = "User not found"
-            render(view: 'error')
+            forward(action: 'home')
         }
 
         //render("${username}  ${password}")
@@ -47,14 +49,17 @@ class LoginController {
     }
 
 
-    def register(){
+    def register(String firstName, String lastName, String email, String username, String password, String confirmPassword) {
 
-        User user = new User(email: params.email,username: params.username , password: params.password,confirmPassword: params.confirmPassword,firstName: params.firstName, lastName: params.lastName)
-        if(user.save()){
-            flash.message="User Saved Successfully"
-        }
-        else {
-            flash.error="User Not Saved"
+        User user = new User(email: email, username: username, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, active: true, admin: false)
+        User.withNewTransaction {
+            if (user.save()) {
+                flash.message = "User Saved Successfully"
+                forward(action: 'home')
+            } else {
+                flash.error = "User Not Saved"
+                forward(action: 'home')
+            }
         }
     }
 }

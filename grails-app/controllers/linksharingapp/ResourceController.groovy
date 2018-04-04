@@ -20,7 +20,12 @@ class ResourceController {
 
     def showTopPost(){
        List<Resource> resources = Resource.topPost()
-        render("Top Post --- ${resources.id}")
+        render(view: '/login/index', model: [resourceList:resources])
+    }
+
+    def showRecentShares(){
+        List<Resource> resources = Resource.recentShares()
+        render(resources)
     }
 
 

@@ -51,14 +51,19 @@ class TopicController {
     }
 
 
-    def save(String topic, String seriousness) {
-        Topic topic1 = new Topic(name: topic, createdBy: session.user, visibility: Visibility.PUBLIC)
+    def save(String name, String visibility) {
+        Visibility visibility1 = Visibility.stringToEnum(visibility)
+        Topic topic1 = new Topic(name: name, createdBy: session.user, visibility: visibility1)
             if (topic1.save()) {
                 render("New Topic saved Successfully")
             } else {
                 render("Topic not saved")
             }
+    }
 
+    def find(){
+        List<Topic> topics = Topic.findAllByCreatedBy(session.user)
+        render(topics.name)
     }
 
 
