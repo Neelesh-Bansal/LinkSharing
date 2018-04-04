@@ -3,7 +3,7 @@ package linksharingapp
 import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
-class UtilControllerSpec extends Specification implements ControllerUnitTest<UtilController> {
+class ReadingItemControllerSpec extends Specification implements ControllerUnitTest<ReadingItemController> {
 
     def setup() {
     }

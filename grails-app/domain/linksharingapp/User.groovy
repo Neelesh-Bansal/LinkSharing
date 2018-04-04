@@ -1,5 +1,7 @@
 package linksharingapp
 
+import linksharingapp.co.SearchCO
+
 class User {
 
     String name
@@ -39,6 +41,21 @@ class User {
 
     static mapping = {
         sort id: 'desc'
+    }
+
+
+
+    static List<ReadingItem> getUnReadResources(SearchCO searchCO){
+        List<ReadingItem> readingItems=[]
+        if(searchCO.q){
+            readingItems = ReadingItem.createCriteria().list(max:searchCO.max,offset:searchCO.offset) {
+                'resource'{
+                    ilike('description',"%${searchCO.q}")
+                }
+                eq('isRead',false)
+            }
+        }
+        return readingItems
     }
 
     static transients = ['name','confirmPassword']

@@ -1,6 +1,7 @@
 package linksharingapp
 
 import linksharingapp.co.ResourceSearchCO
+import linksharingapp.co.SearchCO
 import linksharingapp.enumeration.Visibility
 import linksharingapp.vo.RatingInfoVO
 import linksharingapp.vo.TopicVO
@@ -8,6 +9,13 @@ import linksharingapp.vo.TopicVO
 class ResourceController {
 
     def index() { }
+
+
+    def showUnread(){
+        SearchCO searchCO = new SearchCO(q: "Topic0",max: 5,offset: 0)
+        List<Resource> resources = User.getUnReadResources(searchCO)
+        render("Unread Resouces-- ${resources.id}")
+    }
 
 
     def showTopPost(){

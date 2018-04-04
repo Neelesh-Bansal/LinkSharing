@@ -18,9 +18,9 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
 
     //Write test cases for validating user (including username and email uniqueness)
 
-    void "validating user constraints"(){
+   void "validating user constraints"(){
         setup:
-        User user = new User(email: email,username: uname,password: pass,firstName: fname,lastName: lname,photo: photo,admin: admin,active: active)
+        User user = new User(email: email,username: uname,password: pass,confirmPassword: pass, firstName: fname,lastName: lname,photo: photo,admin: admin,active: active)
         when:
         Boolean result = user.validate()
         then:
@@ -56,6 +56,7 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
         user.setFirstName("neelesh")
         user.setLastName("bansal")
         user.setPassword("abc123")
+        user.setConfirmPassword("abc123")
         user.setUsername("neeleshbansal")
         when:
         user.save()
@@ -66,6 +67,7 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
         user2.setFirstName("nakul")
         user2.setLastName("bansal")
         user2.setPassword("abcd12")
+        user2.setConfirmPassword("abcd12")
         user2.setUsername("nakulbansal")
         when:
         user2.save()
@@ -81,6 +83,7 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
         user.setFirstName("neelesh")
         user.setLastName("bansal")
         user.setPassword("abc123")
+        user.setConfirmPassword("abc123")
         user.setUsername(uname)
         when:
         user.save()
@@ -91,6 +94,7 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
         user2.setFirstName("nakul")
         user2.setLastName("bansal")
         user2.setPassword("abcd12")
+        user2.setConfirmPassword("abcd12")
         user2.setUsername(uname)
         when:
         user2.save()
@@ -102,7 +106,7 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
 
         setup:
 
-        User user = new User(email: "neelesh@ttn.com",username: "neelesh.bansal",password: "abc123",firstName: "neelesh",lastName: "bansal")
+        User user = new User(email: "neelesh@ttn.com",username: "neelesh.bansal",password: "abc123",confirmPassword: "abc123", firstName: "neelesh",lastName: "bansal")
 
         when:
         user.save()
@@ -114,7 +118,7 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
 
     void "validating name"(){
         setup:
-        User user1 = new User(email: "neelesh@ttn.com",username: "neelesh.bansal",password: "abc123",firstName: "neelesh",lastName: "bansal")
+        User user1 = new User(email: "neelesh@ttn.com",username: "neelesh.bansal",password: "abc123",confirmPassword: "abc123",firstName: "neelesh",lastName: "bansal")
 
         when:
         user1.save()

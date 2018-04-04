@@ -50,7 +50,7 @@ class SubscriptionControllerSpec extends Specification implements ControllerUnit
 
     def "testing save"(){
         setup:
-        User user = new User(email:"neelesh@ttn.com",username: "neeleshbansal",password: "abc123",firstName: "neelesh",lastName: "bansal",photo: 1,admin: true,active: null)
+        User user = new User(email:"neelesh@ttn.com",username: "neeleshbansal",password: "abc123",confirmPassword:"abc123" ,firstName: "neelesh",lastName: "bansal",photo: 1,admin: true,active: null)
         session.user=user
         Topic topic=new Topic(name: "Topic5",createdBy: session.user,visibility:Visibility.PUBLIC)
         topic.save()
