@@ -1,5 +1,6 @@
 package linksharing
 
+import linksharingapp.co.ResourceSearchCO
 import linksharingapp.enumeration.Seriousness
 import linksharingapp.enumeration.Visibility
 import grails.util.Holders
@@ -33,7 +34,25 @@ class BootStrap {
         createReadingItems()
         createResourceRatings()
 
+
+        ResourceSearchCO resourceSearchCO = new ResourceSearchCO(visibility: Visibility.PUBLIC)
+        println("***************")
+        Resource resource = Resource.get(5)
+        println resource.totalVotes(resource)
+        println resource.avgScore(resource)
+        println resource.totalScore(resource)
+        List topics = Topic.getTrendingTopics()
+        topics.each {
+            println it.id
+            println it.visibility
+            println it.name
+            println it.createdBy
+            println it.count
+        }
+
     }
+
+
 
     void createResourceRatings(){
         //Add rating for all the unread reading items of the user

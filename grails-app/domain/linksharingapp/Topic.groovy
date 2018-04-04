@@ -2,6 +2,8 @@ package linksharingapp
 
 import linksharingapp.enumeration.Visibility
 import linksharingapp.enumeration.Seriousness
+import linksharingapp.vo.TopicVO
+
 class Topic {
 
     String name
@@ -28,13 +30,31 @@ class Topic {
             Subscription subscription = new Subscription(topic: this,user: createdBy, seriousness: Seriousness.VERY_SERIOUS)
             this.addToSubscriptions(subscription)
             subscription.save()
-//            if (subscription.save(flush:true)){
-//                log.info("Subscription saved  - ${this.addToSubscriptions(subscription)}")
-//            }
-//            else {
-//                log.info("Subscription not saved Error - ${subscription.hasErrors()}")
-//            }
         }
+    }
+
+
+    static List<TopicVO> getTrendingTopics(){
+        List trendingTopics = Resource.createCriteria().list {
+            projections {
+                createAlias('topic', 't')
+                groupProperty('t.id')
+                property('t.name')
+                property('t.visibility')
+                count('t.id', 'count')
+                property('t.createdBy')
+            }
+            eq('t.visibility',Visibility.PUBLIC)
+            order('count', 'desc')
+            order('t.name', 'asc')
+            maxResults(5)
+        }
+
+        List topicVOList = []
+        trendingTopics.each {
+            topicVOList.add(new TopicVO(id: it[0], name: it[1], visibility: it[2], count: it[3], createdBy: it[4]))
+        }
+        return topicVOList
     }
 
 
