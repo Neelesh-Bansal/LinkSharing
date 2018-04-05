@@ -2,12 +2,16 @@ package linksharingapp
 
 import linksharingapp.co.SearchCO
 import linksharingapp.enumeration.Visibility
+import linksharingapp.vo.TopicVO
 
 class UserController {
 
     def index() {
-        render "User Dahsboard -- "
-        render (session?.user?.username)
+        List<TopicVO> topicVOList = Topic.getTrendingTopics()
+//        List<Topic> topics = User.getSubscribedTopic()
+        render (view: '/user/dashboard', model: [topicList:topicVOList])
+//        render "User Dahsboard -- "
+//        render (session?.user?.username)
     }
 
 

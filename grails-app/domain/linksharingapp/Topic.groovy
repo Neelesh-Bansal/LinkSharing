@@ -23,6 +23,7 @@ class Topic {
 
     static mapping = {
         sort name: 'asc'
+        subscriptions fetch: 'join'
     }
 
     def afterInsert(){
@@ -31,6 +32,15 @@ class Topic {
             this.addToSubscriptions(subscription)
             subscription.save()
         }
+    }
+
+
+    List<User> getSubscribedUsers(){
+        List<User> userList = []
+        subscriptions.each {
+            userList.add(it.user)
+        }
+        return userList
     }
 
 
@@ -47,7 +57,7 @@ class Topic {
             eq('t.visibility',Visibility.PUBLIC)
             order('count', 'desc')
             order('t.name', 'asc')
-            maxResults(5)
+            maxResults(2)
         }
 
         List topicVOList = []

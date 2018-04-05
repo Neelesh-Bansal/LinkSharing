@@ -1,4 +1,4 @@
-<%@ page import="linksharingapp.Topic" %>
+<%@ page import="linksharingapp.User; linksharingapp.Topic" %>
 <div id="myModal3" class="modal fade" role="dialog">
     <div class="modal-dialog">
 
@@ -12,13 +12,13 @@
                 <g:form controller="linkResource" action="save" method="POST">
 
                     <label>Link*:</label>
-                    <input class="form-control" type="url" name="link" placeholder="Name">
+                    <input class="form-control" type="text" name="link" placeholder="Name">
 
                     <label>Description*:</label>
                     <g:textArea name="des" value="Description*" rows="10" cols="65"/>
-<br>
+                    <br>
                     <label>Topic*:</label>
-                    <g:select name="topic" from="${linksharingapp.Topic.findAllByCreatedBy(session.user)}"/>
+                    <g:select name="topic" optionKey="id" optionValue="name" from="${session.user.getSubscribedTopics()}"/>
                     <br><br>
                     <g:submitButton name="button" value="Save"/>
                     <g:actionSubmit value="Cancel" controller="login" action="home"/>

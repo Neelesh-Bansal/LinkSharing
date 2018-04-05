@@ -55,9 +55,14 @@ class TopicController {
         Visibility visibility1 = Visibility.stringToEnum(visibility)
         Topic topic1 = new Topic(name: name, createdBy: session.user, visibility: visibility1)
             if (topic1.save()) {
-                render("New Topic saved Successfully")
-            } else {
-                render("Topic not saved")
+                Subscription subscription = new Subscription(topic: topic1,user:session.user,seriousness: Seriousness.VERY_SERIOUS)
+                subscription.save()
+                    flash.message = "New Topic saved Successfully"
+                    redirect(controller: 'user', action: 'index')
+                }
+            else {
+                flash.message="New Topic Not Saved"
+                redirect(controller: 'user', action:'index')
             }
     }
 

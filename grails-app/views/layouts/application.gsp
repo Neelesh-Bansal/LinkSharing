@@ -1,15 +1,8 @@
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" integrity="sha384-SlE991lGASHoBfWbelyBPLsUlwY1GwNDJo3jSJO04KZ33K2bwfV9YBauFfnzvynJ" crossorigin="anonymous"></script><title>Title</title>
-    <asset:stylesheet src="header.css"/>
-    %{--<meta name="viewport" content="width=device-width, initial-scale=1">--}%
-    %{--<asset:stylesheet href="application.css"></asset:stylesheet>--}%
-    %{--<asset:javascript src="application.js"></asset:javascript>--}%
-    %{--<asset:stylesheet src="header.css"></asset:stylesheet>--}%
-    %{--<g:layoutHead/>--}%
+     <asset:stylesheet src="header.css"/>
+    <asset:stylesheet href="application.css"/>
+    <asset:javascript src="application.js"/>
 </head>
 <body>
 <g:if test="${!session.user}">

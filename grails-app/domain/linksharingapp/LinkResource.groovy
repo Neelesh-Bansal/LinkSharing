@@ -7,7 +7,7 @@ class LinkResource extends Resource {
     Date lastUpdated
 
     static constraints = {
-        url(url: true)
+        //url(url: true)
     }
 
 

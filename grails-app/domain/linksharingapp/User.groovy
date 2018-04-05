@@ -2,6 +2,8 @@ package linksharingapp
 
 import linksharingapp.co.SearchCO
 
+import java.beans.Transient
+
 class User {
 
     String name
@@ -41,6 +43,7 @@ class User {
 
     static mapping = {
         sort id: 'desc'
+        subscriptions fetch: 'join'
     }
 
 
@@ -58,7 +61,21 @@ class User {
         return readingItems
     }
 
-    static transients = ['name','confirmPassword']
+
+
+    List<Topic> getSubscribedTopics(){
+        List<Topic> topicList = []
+        subscriptions.each {
+            topicList.add(it.topic)
+        }
+        return topicList
+    }
+
+
+
+
+
+    static transients = ['name','confirmPassword','subscribedTopic']
 
 
     @Override
