@@ -13,7 +13,7 @@ class User {
     String confirmPassword
     String firstName
     String lastName
-    byte photo
+    byte[] photo
     Boolean admin
     Boolean active
     Date dateCreated
@@ -44,6 +44,7 @@ class User {
     static mapping = {
         sort id: 'desc'
         subscriptions fetch: 'join'
+        photo sqlType: 'longblob'
     }
 
 

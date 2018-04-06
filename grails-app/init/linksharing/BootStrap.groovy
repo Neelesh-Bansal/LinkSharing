@@ -18,37 +18,37 @@ import linksharingapp.constants.DefaultPassword
 class BootStrap {
 
     def init = { servletContext ->
-
-        log.info("**********************************************")
-        println(Holders.grailsApplication.config.server.contextPath)
-
-        if(User.count()==0) {
-            createUsers()
-        }
-        createTopics()
-
-        if(Resource.count()==0) {
-            createResources()
-        }
-        subscribeTopics()
-        createReadingItems()
-        createResourceRatings()
-
-
-        ResourceSearchCO resourceSearchCO = new ResourceSearchCO(visibility: Visibility.PUBLIC)
-        println("***************")
-        Resource resource = Resource.get(5)
-        println resource.totalVotes(resource)
-        println resource.avgScore(resource)
-        println resource.totalScore(resource)
-        List topics = Topic.getTrendingTopics()
-        topics.each {
-            println it.id
-            println it.visibility
-            println it.name
-            println it.createdBy
-            println it.count
-        }
+//
+//        log.info("**********************************************")
+//        println(Holders.grailsApplication.config.server.contextPath)
+//
+//        if(User.count()==0) {
+//            createUsers()
+//        }
+//        createTopics()
+//
+//        if(Resource.count()==0) {
+//            createResources()
+//        }
+//        subscribeTopics()
+//        createReadingItems()
+//        createResourceRatings()
+//
+//
+//        ResourceSearchCO resourceSearchCO = new ResourceSearchCO(visibility: Visibility.PUBLIC)
+//        println("***************")
+//        Resource resource = Resource.get(5)
+//        println resource.totalVotes(resource)
+//        println resource.avgScore(resource)
+//        println resource.totalScore(resource)
+//        List topics = Topic.getTrendingTopics()
+//        topics.each {
+//            println it.id
+//            println it.visibility
+//            println it.name
+//            println it.createdBy
+//            println it.count
+//        }
 
     }
 

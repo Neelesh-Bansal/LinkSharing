@@ -6,7 +6,7 @@
 </head>
 <body>
 <g:if test="${!session.user}">
-  <div class="page-header well">
+  <div class="page-header well" style="margin-top: 0px">
     <span>
         <a class="text-primary" href="#" style="text-decoration: underline">Link Sharing</a>
     </span>
@@ -20,7 +20,7 @@
   </div>
 </g:if>
 <g:else>
-    <header class="page-header well" style="padding-bottom: 50px">
+    <header class="page-header well" style="padding-bottom: 50px ; margin-top: 0px">
         <div class="col-lg-5">
             <span>
 
@@ -80,7 +80,7 @@
 
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     <i class="fas fa-user" style="font-size:24px"></i>
-                    neelesh
+                    ${session.user.firstName}
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
@@ -88,7 +88,7 @@
                     <li><a href="#">Users</a></li>
                     <li><a href="#">Topic</a></li>
                     <li><a href="#">Posts</a></li>
-                    <li><a href="#">Logout</a></li>
+                    <li><g:link controller="login" action="logout">Logout</g:link></li>
                 </ul>
             </span>
         </div>

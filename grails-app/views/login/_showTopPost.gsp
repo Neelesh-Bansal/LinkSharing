@@ -6,6 +6,7 @@
     <div class="col-lg-10">
         <span class="text">${demo.createdBy.firstName}</span>
         <span class="text-muted">@${demo.createdBy.username} 5min</span>
+        <span class="text-primary" style="float: right">${demo.topic.name}</span>
         <p class="text">${demo.description}</p>
        <div>
             <span class="fab fa-facebook fa-1x">   </span>

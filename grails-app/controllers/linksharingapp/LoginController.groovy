@@ -1,5 +1,7 @@
 package linksharingapp
 
+import sun.security.pkcs11.Secmod
+
 class LoginController {
 
     static defaultAction = "home"
@@ -51,7 +53,10 @@ class LoginController {
 
     def register(String firstName, String lastName, String email, String username, String password, String confirmPassword) {
 
-        User user = new User(email: email, username: username, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, active: true, admin: false)
+        def file=params.photo
+        byte[] photo = file.bytes
+
+        User user = new User(email: email, username: username, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName,photo: photo, active: true, admin: false)
         User.withNewTransaction {
             if (user.save()) {
                 flash.message = "User Saved Successfully"

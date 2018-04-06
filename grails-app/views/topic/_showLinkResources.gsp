@@ -4,10 +4,7 @@
     </div>
 
     <div class="col-lg-10">
-        <span class="text">${demo2.createdBy.firstName}</span>
-        <span class="text-muted">@${demo2.createdBy.username} 5min</span>
-        <span class="text-primary" style="float: right">${demo2.topic.name}</span>
-        <p class="text">${demo2.description}</p>
+        <p class="text">${demo4.url}</p>
         <div>
             <span class="fab fa-facebook fa-1x">   </span>
             <span class="fab fa-tumblr fa-1x">  </span>

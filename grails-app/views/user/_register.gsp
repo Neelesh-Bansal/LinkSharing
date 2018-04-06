@@ -3,7 +3,7 @@
         Sign Up
     </div>
     <div class="panel-body">
-        <g:form url="[controller:'login', action:'register']" method="POST">
+        <g:form url="[controller:'login', action:'register']" enctype="multipart/form-data" >
 
             <label>First Name *</label>
             <input class="form-control" type="text" name="firstName" >
