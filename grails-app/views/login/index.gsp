@@ -46,7 +46,8 @@
                 <div class="panel-body">
                     <div class="row">
 
-                                    <g:render template='/login/showTopPost' var="demo" collection="${resourceList1}"></g:render>
+                        <ls:topPost />
+                                    %{--<g:render template='/login/showTopPost' var="demo" collection="${resourceList1}"></g:render>--}%
                     </div>
                </div>
         </div>

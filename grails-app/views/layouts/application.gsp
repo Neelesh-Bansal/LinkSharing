@@ -10,13 +10,19 @@
     <span>
         <a class="text-primary" href="#" style="text-decoration: underline">Link Sharing</a>
     </span>
-    <span class="search">
-        <span class="fa fa-search"></span>
-        <input placeholder="Search ">
-        <span>
-            <i class=" fa fa-times"></i>
-        </span>
-    </span>
+      <g:form class="search" url="[controller:'resource',action:'search']">
+
+          <span><i class="fa fa-search"></i></span>
+          <input id="inputSearch" placeholder="Search" name="key">
+          <span><i class=" fa fa-times"></i></span>
+      </g:form>
+    %{--<span class="search">--}%
+        %{--<span class="fa fa-search"></span>--}%
+        %{--<input placeholder="Search ">--}%
+        %{--<span>--}%
+            %{--<i class=" fa fa-times"></i>--}%
+        %{--</span>--}%
+    %{--</span>--}%
   </div>
 </g:if>
 <g:else>

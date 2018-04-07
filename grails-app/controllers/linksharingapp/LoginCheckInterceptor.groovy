@@ -8,7 +8,7 @@ class LoginCheckInterceptor {
     }
 
     boolean before() {
-        if (!session.user) {
+        if (!session.user && controllerName !="resource") {
             redirect(controller: 'login', action: 'home')
         }
         true

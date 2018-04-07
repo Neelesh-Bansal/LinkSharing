@@ -6,4 +6,5 @@ class ResourceSearchCO extends SearchCO {
 
     Long topicId
     Visibility visibility
+
 }

@@ -134,7 +134,8 @@
                     Trending topics
                 </div>
                 <div class="panel-body">
-                    <g:render template='/topic/showTrendingTopics' var="demo3" collection="${topicList}"></g:render>
+                    <ls:trendingTopics/>
+                    %{--<g:render template='/topic/showTrendingTopics' var="demo3" collection="${topicList}"></g:render>--}%
                     %{--<div class="row" style="padding-bottom:10px">--}%
                         %{--<div class="col-lg-3">--}%
                             %{--<asset:image class="img-responsive" src="image.jpg" alt="neelesh"/>--}%

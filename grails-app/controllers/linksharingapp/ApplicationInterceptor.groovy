@@ -4,7 +4,7 @@ package linksharingapp
 class ApplicationInterceptor {
 
     ApplicationInterceptor(){
-        matchAll()
+        matchAll().excludes(controllerName: 'resource')
     }
 
     boolean before() {

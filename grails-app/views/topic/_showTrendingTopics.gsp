@@ -1,6 +1,6 @@
 <div class="row" style="padding-bottom:10px">
     <div class="col-lg-3">
-        <img src="${demo3.createdBy.photo}" name="photo" >
+        %{--<img src="${demo3.createdBy.photo}" name="photo" >--}%
     </div>
     <div class="col-lg-9">
         <div class="text-primary">

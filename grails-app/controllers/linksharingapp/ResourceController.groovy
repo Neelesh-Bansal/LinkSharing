@@ -44,16 +44,29 @@ def show2(){
 
     }
 
+      //Search resource functionality
+    def search(String key) {
+        println("Inside search")
+        Topic topic = Topic.findByName(key)
+        println(topic)
+        if (topic){
+            SearchCO co = new ResourceSearchCO()
+            co.topicId=topic.id
+            co.q = topic.visibility
+            if(co.q){
+                co.setVisibility(topic.visibility)
+            }
+            List<Resource> resources = Resource.search(co).list()
+            render(view: '/resource/search',model: [resourceList:resources])
 
-    def search(){
-        ResourceSearchCO resourceSearchCO=new ResourceSearchCO()
-        if(resourceSearchCO.q)
-            resourceSearchCO.visibility=Visibility.PUBLIC
-
-
-        List<Resource> resources = Resource.search(resourceSearchCO).list()
-        render(resources.createdBy.firstName)
+        }
+        else {
+            flash.error = "Resource not found... Try Again!!"
+            redirect(controller : 'login' , action : 'index')
+        }
     }
+
+
 
 
     def delete(Long id){

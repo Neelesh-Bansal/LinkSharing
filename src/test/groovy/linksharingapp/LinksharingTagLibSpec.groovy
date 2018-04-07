@@ -3,7 +3,7 @@ package linksharingapp
 import grails.testing.web.taglib.TagLibUnitTest
 import spock.lang.Specification
 
-class DemoTagLibSpec extends Specification implements TagLibUnitTest<DemoTagLib> {
+class LinksharingTagLibSpec extends Specification implements TagLibUnitTest<LinksharingTagLib> {
 
     def setup() {
     }

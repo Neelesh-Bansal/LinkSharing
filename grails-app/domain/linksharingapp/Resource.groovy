@@ -21,6 +21,9 @@ abstract class Resource {
 
         description(type: 'text')
     }
+    static mapping = {
+        topic fetch: 'join'
+    }
 
     static transients = ['ratingInfoVO']
 
@@ -28,8 +31,8 @@ abstract class Resource {
         search {ResourceSearchCO resourceSearchCO ->
             if (resourceSearchCO.topicId)
                 eq('topic.id', resourceSearchCO.topicId)
-            if (resourceSearchCO.visibility)
-                eq('topic.visibility', resourceSearchCO.visibility)
+//            if (resourceSearchCO.visibility)
+//                eq('topic.visibility', resourceSearchCO.visibility)
         }
     }
 
@@ -73,8 +76,6 @@ abstract class Resource {
             ratingInfoVO.totalScore = totalScore(resource)
             return ratingInfoVO
     }
-
-
 
 
     static List<Resource> topPost(){
