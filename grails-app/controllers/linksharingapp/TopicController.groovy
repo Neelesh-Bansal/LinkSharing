@@ -49,13 +49,7 @@ class TopicController {
         }
 
         List<Resource> resources = LinkResource.findAllByTopic(topic)
-//        List<Subscription> subscriptions = Subscription.findAllByTopic(topic)
-//
-//        List<User> users = subscriptions
-        println("()()()()()()()()()()()")
-//        println(users)
-        println(users)
-        // List<DocumentResource> documentResources = Resource.findAllByTopic(topic)
+
         render(view: 'show', model: [topic1: topic, resource1: resources, users1: users])
     }
 

@@ -60,6 +60,5 @@ class SubscriptionControllerSpec extends Specification implements ControllerUnit
         controller.save(topic.id)
         then:
         response.contentAsString=="success"
-
     }
 }

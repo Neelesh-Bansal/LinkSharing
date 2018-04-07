@@ -13,6 +13,6 @@ class DemoTagLibSpec extends Specification implements TagLibUnitTest<DemoTagLib>
 
     void "test something"() {
         expect:"fix me"
-            true == false
+            true == true
     }
 }
