@@ -34,13 +34,24 @@ def show2(){
     render("Top 5 Trending topics--${topicVOList.toString()}\n")
 
 }
-
     def show(Long id){
         Resource resource=Resource.get(id)
-        RatingInfoVO ratingInfoVO= resource.setRatingInfoVO(resource)
-        render("Total Votes--${ratingInfoVO.totalVotes}")
-        render("Average Score--${ratingInfoVO.averageScore}")
-        render("Total Score--${ratingInfoVO.totalScore}")
+//        RatingInfoVO ratingInfoVO= resource.setRatingInfoVO(resource)
+//        render("Total Votes--${ratingInfoVO.totalVotes}")
+//        render("Average Score--${ratingInfoVO.averageScore}")
+//        render("Total Score--${ratingInfoVO.totalScore}")
+        if(session.user && resource.canViewBy(session.user)){
+            String resourceType = Resource.findTypeOfResource(id)
+            render(view: '',model: [resource:resource,resourceType : resourceType])
+        }
+        else if(resource.topic.isPublic()){
+            String resourceType = Resource.findTypeOfResource(id)
+            render(view: '/resource/show',model: [resource:resource,resourceType : resourceType])
+        }
+        else {
+            flash.error = "User cannot view this resource"
+            redirect(controller: 'login',action: 'index')
+        }
 
     }
 
@@ -70,13 +81,19 @@ def show2(){
 
 
     def delete(Long id){
-        Resource resource = Resource.read(id)
-        try {
-            println(resource.delete())
-            render("Resource deleted successfully")
+        if(session.user) {
+            Resource resource = Resource.get(id)
+            if (resource.delete()) {
+                flash.message = "Resource deleted successfully"
+                render(controller: 'login', action: 'index')
+            } else {
+                flash.error = "Resource not found"
+                render(controller: 'login', action: 'index')
+            }
         }
-        catch (RuntimeException ex){
-            render("Resource not found")
+        else {
+            flash.error = "Please login to perform action"
+            render(controller: 'login', action: 'index')
         }
 
     }

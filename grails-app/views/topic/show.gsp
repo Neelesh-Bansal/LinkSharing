@@ -1,3 +1,5 @@
+%{--Whenever user click on topic name it will work--}%
+
 <div class="container">
 <div class="col-lg-5">
     <div class="row">

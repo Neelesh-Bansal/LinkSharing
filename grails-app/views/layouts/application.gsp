@@ -90,7 +90,7 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">Profile</a></li>
+                    <li><g:link controller="user" action="profile">Profile</g:link> </li>
                     <li><a href="#">Users</a></li>
                     <li><a href="#">Topic</a></li>
                     <li><a href="#">Posts</a></li>

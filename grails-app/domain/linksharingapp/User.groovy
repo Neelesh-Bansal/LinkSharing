@@ -48,6 +48,15 @@ class User {
     }
 
 
+    Integer getScore(Resource resource){
+        ResourceRating resourceRating = ResourceRating.findByUserAndResource(this,resource)
+        if (resourceRating){
+            return resourceRating.score
+        }else {
+            return 1
+        }
+    }
+
 
     static List<ReadingItem> getUnReadResources(SearchCO searchCO){
         List<ReadingItem> readingItems=[]

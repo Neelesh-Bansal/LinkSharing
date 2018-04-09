@@ -33,4 +33,39 @@ class LinksharingTagLib {
         List<Resource> resourcesList = Resource.topPost()
         out<< g.render(template: '/login/showTopPost', collection: resourcesList, var: "demo" )
     }
+//
+//    def canDeleteResource = {
+//
+//    }
+
+    def showSubscribe = {attrs,body ->
+        def value
+        if (attrs.topicId && session.user){
+            value = "delete"
+        }else {
+            value = "save"
+        }
+        out << body() << value
+    }
+
+    def subscriptionCount = { attrs,body ->
+        if(session.user && attrs.topicId){
+            Topic topic = Topic.findById(attrs.topicId.toLong())
+            out << body() << topic.subscriptions.size()
+        }
+        else if (session.user){
+            out << body() << session.user.subscriptions.size()
+        }
+    }
+
+
+    def resourceCount = {attrs,body ->
+        List<Resource> resources = Resource.findAllByTopic(attrs.topicId.toLong())
+        out << body() << resources.size()
+    }
+
+    def topicCount = {attrs,body ->
+        out << body() << session.user.topics.size()
+    }
+    
 }

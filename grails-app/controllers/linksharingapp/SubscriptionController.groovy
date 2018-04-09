@@ -11,10 +11,14 @@ class SubscriptionController {
         Topic topic = Topic.findById(id)
         Subscription subscription = new Subscription(user: session.user, topic: topic)
         Subscription.withNewTransaction {
-            if (subscription.save())
-                render("success")
-            else
-                render("error")
+            if (subscription.save()) {
+                flash.message="Success"
+                render(controller: 'login', action: 'index')
+            }
+            else {
+                flash.error = "Unsuccess"
+                render(controller: 'login', action: 'index')
+            }
         }
     }
 
@@ -38,9 +42,11 @@ class SubscriptionController {
         Subscription.withNewTransaction {
             if (subscription) {
                 subscription.delete()
-                render("Success")
+                flash.message="Success"
+                render(controller: 'login', action: 'index')
             } else {
-                render("Subscription not found with this id - ${id}")
+                flash.error = "Error while deleting"
+                render(controller: 'login', action: 'index')
             }
         }
     }

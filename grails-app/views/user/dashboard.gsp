@@ -190,29 +190,29 @@
                         </div>
 
 
-                        <span class="dropdown col-lg-offset-2">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Serious
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">VERYSERIOUS</a></li>
-                                <li><a href="#">SERIOUS</a></li>
-                                <li><a href="#">CASUAL</a></li>
-                            </ul>
-                        </span>
+                        %{--<span class="dropdown col-lg-offset-2">--}%
+                            %{--<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Serious--}%
+                                %{--<span class="caret"></span>--}%
+                            %{--</button>--}%
+                            %{--<ul class="dropdown-menu">--}%
+                                %{--<li><a href="#">VERYSERIOUS</a></li>--}%
+                                %{--<li><a href="#">SERIOUS</a></li>--}%
+                                %{--<li><a href="#">CASUAL</a></li>--}%
+                            %{--</ul>--}%
+                        %{--</span>--}%
 
-                        <span class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Private</a></li>
-                                <li><a href="#">Public</a></li>
-                            </ul>
-                        </span>
-                        <i class="far fa-envelope fa-2x"></i>
-                        <i class="far fa-file fa-2x"></i>
-                        <i class="far fa-trash-alt fa-2x"></i>
+                        %{--<span class="dropdown">--}%
+                            %{--<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">--}%
+                                %{--<span class="caret"></span>--}%
+                            %{--</button>--}%
+                            %{--<ul class="dropdown-menu">--}%
+                                %{--<li><a href="#">Private</a></li>--}%
+                                %{--<li><a href="#">Public</a></li>--}%
+                            %{--</ul>--}%
+                        %{--</span>--}%
+                        %{--<i class="far fa-envelope fa-2x"></i>--}%
+                        %{--<i class="far fa-file fa-2x"></i>--}%
+                        %{--<i class="far fa-trash-alt fa-2x"></i>--}%
 
                     </div>
                 </div>
@@ -255,7 +255,7 @@
                             <a href="#" class="text-primary" style="text-decoration: underline;">Download</a>
                         </div>
                         <div class="col-lg-3">
-                            <a href="#" class="text-primary" style="text-decoration: underline;">View Full Size</a>
+                            <a href="#" class="text-primary" style="text-decoration: underline;">View Full Site</a>
                         </div>
                         <div class="col-lg-3">
                             <a href="#" class="text-primary" style="text-decoration: underline;">Mark As Read</a>
@@ -290,7 +290,7 @@
                         <a href="#" class="text-primary" style="text-decoration: underline;">Download</a>
                     </div>
                     <div class="col-lg-3">
-                        <a href="#" class="text-primary" style="text-decoration: underline;">View Full Size</a>
+                        <a href="#" class="text-primary" style="text-decoration: underline;">View Full Site</a>
                     </div>
                     <div class="col-lg-3">
                         <a href="#" class="text-primary" style="text-decoration: underline;">Mark As Read</a>

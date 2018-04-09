@@ -26,6 +26,20 @@ class Topic {
         subscriptions fetch: 'join'
     }
 
+     Boolean isPublic(){
+        if(this.visibility == Visibility.PUBLIC)
+            return true
+
+        return false
+    }
+
+    Boolean canViewedBy(User user){
+        if (this.isPublic(topic.id) || user.subscriptions.contains(topic) || user.admin)
+            return true
+
+        return false
+    }
+
     def afterInsert(){
         Topic.withNewSession {
             Subscription subscription = new Subscription(topic: this,user: createdBy, seriousness: Seriousness.VERY_SERIOUS)

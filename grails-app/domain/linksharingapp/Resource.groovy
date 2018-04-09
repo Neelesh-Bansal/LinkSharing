@@ -18,7 +18,6 @@ abstract class Resource {
     static hasMany = [ratings:ResourceRating, readingItems:ReadingItem]
 
     static constraints = {
-
         description(type: 'text')
     }
     static mapping = {
@@ -102,6 +101,29 @@ abstract class Resource {
 
         }
         return results
+    }
+
+
+    static String findTypeOfResource(Long id){
+        Resource resource = Resource.findById(id)
+        if(resource.class == LinkResource.class){
+            return "LinkResource"
+        }
+        else if(resource.class == DocumentResource.class){
+            return "DocumentResource"
+        }
+        else{
+            return false
+        }
+    }
+
+    Boolean canViewBy(User user){
+        if (this.topic.canViewedBy(user)){
+            return true
+        }
+        else {
+            return false
+        }
     }
 
 }

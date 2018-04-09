@@ -12,7 +12,8 @@
             <span class="fab fa-facebook fa-1x">   </span>
             <span class="fab fa-tumblr fa-1x">  </span>
             <span class="fab fa-google-plus-g fa-1x">  </span>
-           <a href="#" class="text-primary" style="text-decoration: underline;float: right">View post</a>
+           <a href="${createLink(controller: 'resource',action: 'show',id:demo.id)}" class="text-primary pull-right"
+              style="text-decoration: underline">view post</a>
        </div>
     </div>
 </div>
