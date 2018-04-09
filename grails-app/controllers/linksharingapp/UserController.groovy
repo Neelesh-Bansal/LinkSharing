@@ -6,13 +6,23 @@ import linksharingapp.vo.TopicVO
 
 class UserController {
 
+    def assetResourceLocator
     def index() {
-        List<TopicVO> topicVOList = Topic.getTrendingTopics()
+        if(session.user) {
+            List<TopicVO> topicVOList = Topic.getTrendingTopics()
 //        List<Topic> topics = User.getSubscribedTopic()
-        render (view: '/user/dashboard', model: [topicList:topicVOList])
+            render(view: '/user/dashboard', model: [topicList: topicVOList])
+        }
+        else{
+            flash.error = "Login to continue"
+            render(controller: 'login', action: 'index')
+        }
 //        render "User Dahsboard -- "
 //        render (session?.user?.username)
     }
+
+
+
 
     //used in canDeleteResource taglib
     def canDeleteResource(){
@@ -63,6 +73,24 @@ class UserController {
         else {
             return false
         }
+    }
+
+
+
+    def fetchUserImage(){
+        User user = User.findByUsername(params.username)
+        byte[] photo
+        if(!user?.photo){
+            println("Photo Not Found")
+            photo = assetResourceLocator.findAssetForURI('image.jpg').byteArray
+        }else {
+            println("Photo Found")
+            photo= user.photo
+        }
+        OutputStream out = response.getOutputStream()
+        out.write(photo)
+        out.flush()
+        out.close()
     }
 
 }

@@ -33,10 +33,10 @@ class LinksharingTagLib {
         List<Resource> resourcesList = Resource.topPost()
         out<< g.render(template: '/login/showTopPost', collection: resourcesList, var: "demo" )
     }
-//
-//    def canDeleteResource = {
-//
-//    }
+
+    def canDeleteResource = {
+
+    }
 
     def showSubscribe = {attrs,body ->
         def value
@@ -67,5 +67,8 @@ class LinksharingTagLib {
     def topicCount = {attrs,body ->
         out << body() << session.user.topics.size()
     }
-    
+
+    def userImage = { attrs, body ->
+        out << "<img src='${createLink(controller: 'user', action: 'fetchUserImage', params: [username: session.user.username])}' " + " height='${attrs.height}' width='${attrs.width}'>" }
+
 }

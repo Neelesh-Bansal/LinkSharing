@@ -4,7 +4,7 @@
         Sign Up
     </div>
     <div class="panel-body">
-        <g:form url="[controller:'login', action:'register']" enctype="multipart/form-data" >
+        <g:uploadForm url="[controller:'login', action:'register']" enctype="multipart/form-data" >
 
             <label>First Name *</label>
             <input class="form-control" type="text" name="firstName" >
@@ -28,6 +28,6 @@
         <input class="form-control" type="file" name="photo" >
 
             <g:submitButton name="button2" value="Submit"/>
-        </g:form>
+        </g:uploadForm>
     </div>
 </div>

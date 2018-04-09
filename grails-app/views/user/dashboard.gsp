@@ -10,7 +10,7 @@
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="col-lg-3">
-                        <asset:image class="img-responsive" src="image.jpg" alt="neelesh"/>
+                        <ls:userImage height="100" width="100"></ls:userImage>
                     </div>
                     <div class="col-lg-9">
                         <div class="text">

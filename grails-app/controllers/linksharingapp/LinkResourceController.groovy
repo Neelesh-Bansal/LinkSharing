@@ -8,6 +8,7 @@ class LinkResourceController {
     def save(String link, String des,Long topic){
 //        List query = topic.tokenize("=")
 //        String topic2 = query[1]
+        if(session.user){
         Topic topic1 = Topic.findById(topic)
         println("(((((((((((((()))))))))))))))))")
         println(topic1)
@@ -18,6 +19,11 @@ class LinkResourceController {
         }
         else{
             render("Not Saved")
+        }
+      }
+        else{
+            flash.error = "Login to continue"
+            render(controller: 'login', action: 'index')
         }
     }
 }

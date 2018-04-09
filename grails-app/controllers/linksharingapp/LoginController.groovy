@@ -5,6 +5,7 @@ import sun.security.pkcs11.Secmod
 class LoginController {
 
     static defaultAction = "home"
+    def sendMailService
 
     def home(){
         println("Home.....")
@@ -20,6 +21,11 @@ class LoginController {
         else{
             render "session.user doesn't exist"
         }
+    }
+
+
+    def showForgotPassword() {
+        render(view: '/user/forgotPassword')
     }
 
     def loginHandler(String username, String password) {
@@ -39,9 +45,7 @@ class LoginController {
             flash.error = "User not found"
             forward(action: 'home')
         }
-
         //render("${username}  ${password}")
-
     }
 
     def logout() {
@@ -53,10 +57,8 @@ class LoginController {
 
     def register(String firstName, String lastName, String email, String username, String password, String confirmPassword) {
 
-        def file=params.photo
-        byte[] photo = file.bytes
 
-        User user = new User(email: email, username: username, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName,photo: photo, active: true, admin: false)
+        User user = new User(email: email, username: username, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName,photo: params.photo.bytes, active: true, admin: false)
         User.withNewTransaction {
             if (user.save()) {
                 flash.message = "User Saved Successfully"
@@ -67,4 +69,22 @@ class LoginController {
             }
         }
     }
+
+
+    def changePassword() {
+        render(view: '/user/changePassword', model: [emailId: params.emailId])
+    }
+
+
+
+
+    def sendingMail() {
+        sendMailService.sendMailMethod("$params.email", "Change Password request", "${g.link(controller: "login", action: "changePassword", params: [emailId: params.email], absolute: "true", { "click on the link to change your password" })}")
+        flash.message = "check your mail to update the password"
+        redirect(action: 'index')
+    }
+
+
+
+
 }

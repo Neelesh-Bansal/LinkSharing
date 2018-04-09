@@ -20,12 +20,10 @@
             <label>Password</label>
             <input class="form-control" type="password" name="password" placeholder="Enter Your Password">
 
-            %{--<div>--}%
-                %{--<a href="#myModal5" data-toggle="modal" data-target="#myModal5">--}%
-                    %{--<i>ForgotPassword</i>--}%
-                %{--</a>--}%
-            %{--</div>--}%
-            %{--<g:render template="/user/forgotPassword"></g:render>--}%
+            <g:link controller="login" action="showForgotPassword">
+                <button type="button" class="btn btn-link col-xs-6 ">Forgot Password?</button>
+            </g:link>
+            <div></div>
 
             <g:submitButton name="button" value="Login"/>
         </g:form>
