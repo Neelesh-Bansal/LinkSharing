@@ -1,10 +1,12 @@
 package linksharingapp
 
 import linksharingapp.co.ResourceSearchCO
+import linksharingapp.dto.EmailDTO
 import linksharingapp.enumeration.Visibility
 import linksharingapp.enumeration.Seriousness
 
 class TopicController {
+    def sendMailService
 
     def index() {}
 
@@ -92,5 +94,49 @@ class TopicController {
         render(topics.name)
     }
 
+
+    //need to specify the user to whom we are going to do this subscribe operation
+    def join(Long id)
+    {
+        Topic topic=Topic.findById(id)
+        Subscription subscription = new Subscription(topic: topic , user: user, seriousness: Seriousness.SERIOUS)
+
+        if (subscription.validate())
+        {
+            subscription.save()
+            flash.message="Subscribed for the topic successfully"
+
+        }
+
+        else
+        {
+            flash.error="Error while subscribing for the topic"
+
+        }
+    }
+
+
+
+    def invite()
+    {
+        Topic topic1 = Topic.findById(params.topic)
+
+        if (topic1 && User.findByEmail(params.to))
+        {
+
+            EmailDTO emailDTO = new EmailDTO(to: params.to, subject:"INVITATION" ,from:"linksharing1@gmail.com" , linkId: topic1.id , content: "Please subscribe for the Topic")
+
+            sendMailService.sendInvitation(emailDTO)
+            flash.message = "Invitation Send"
+            redirect(controller: 'user', action: 'index')
+
+
+        }
+        else
+        {
+            flash.error= "Error while inviting user"
+            redirect(controller: 'user', action: 'index')
+        }
+    }
 
 }

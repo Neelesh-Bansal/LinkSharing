@@ -2,8 +2,7 @@
 <!doctype HTML>
 <html>
 <head>
-    <title>Link Sharing</title>
-    <script src="${resource(dir: 'js/jQuery', file: 'jquery.min.js')}"></script>
+
 </head>
 
 <body>
@@ -15,9 +14,12 @@
     <div class="panel-body">
         <g:form class="form-box" name="login" controller="login">
             <div>
-
+                <g:textField name="username" class="form-control form-register-field" placeholder="Username"/>
+            </div>
+            <div>
                 <g:textField name="email" class="form-control form-register-field" placeholder="Email"/>
-            </div><br>
+            </div>
+            <br>
             <g:actionSubmit name="button" value="submit" action="sendingMail" style="width: 75%; margin-left: 10%;"
                             class="btn form-btn"/>
         </g:form>

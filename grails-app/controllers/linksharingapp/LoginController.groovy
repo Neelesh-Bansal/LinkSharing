@@ -1,6 +1,7 @@
 package linksharingapp
 
-import sun.security.pkcs11.Secmod
+import linksharingapp.dto.EmailDTO
+import linksharingapp.utility.Util
 
 class LoginController {
 
@@ -79,12 +80,25 @@ class LoginController {
 
 
     def sendingMail() {
-        sendMailService.sendMailMethod("$params.email", "Change Password request", "${g.link(controller: "login", action: "changePassword", params: [emailId: params.email], absolute: "true", { "click on the link to change your password" })}")
-        flash.message = "check your mail to update the password"
-        redirect(action: 'index')
+        if(User.findByEmailAndUsername(params.email,params.username))
+        {
+
+            Util util = new Util()
+            def newPassword = Util.randomPassword
+
+            EmailDTO emailDTO = new EmailDTO(to: params.email, subject: "Password Reset" ,from:"linksharing1@gmail.com",content:"Your new password is : ${newPassword}")
+            sendMailService.sendMail(emailDTO)
+
+
+            flash.message="Mail sent successlly"
+            forward(action: 'home')
+        }
+
+        else
+        {
+            flash.error="Mail not sent please check username and email"
+            forward(action: 'home')
+        }
     }
-
-
-
 
 }
