@@ -10,5 +10,4 @@ class EmailDTO {
     List <String> itemList
     List <String> createrList
 
-
 }

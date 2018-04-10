@@ -29,4 +29,12 @@ class SendMailService {
         }
     }
 
+    def sendUnreadResourcesEmail() {
+        mailService.sendMail {
+            to emailDTO.to
+            subject emailDTO.subject
+            html view: "/email/UnreadResources", model: [list1: "${emailDTO.itemList}", list2: "${emailDTO.createrList}"]
+        }
+    }
+
 }

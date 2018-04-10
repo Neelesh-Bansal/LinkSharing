@@ -11,6 +11,26 @@ class ResourceController {
     def index() { }
 
 
+    //Q24 Plugin
+    def save(Long id,String des){
+        println(id)
+        println("In save mode")
+        Resource resource = Resource.findById(id)//need not to call save operation
+        println(resource)
+        if(resource) {
+            println("Inside Saving")
+            resource.description = des
+            resource.save()
+            flash.message = "Description edit successfully"
+            redirect(controller: 'user', action: 'index')
+        }
+        else{
+            flash.error = "post not found"
+            redirect(controller: 'user', action: 'index')
+        }
+    }
+
+
     def showUnread(){
         SearchCO searchCO = new SearchCO(q: "Topic0",max: 5,offset: 0)
         List<Resource> resources = User.getUnReadResources(searchCO)

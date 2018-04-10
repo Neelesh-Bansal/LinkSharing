@@ -36,14 +36,12 @@
         </div>
         <div class="col-lg-7">
             <div class="col-lg-5">
-                <span class="search">
-                    <span>
-                        <i class=" fa fa-times"></i>
-                    </span>
-                    <span class="fa fa-search"></span>
-                    <input placeholder="Search term">
+                <g:form class="search" url="[controller:'resource',action:'search']">
 
-                </span>
+                    <span><i class="fa fa-search"></i></span>
+                    <input id="inputSearch" placeholder="Search" name="key">
+                    <span><i class=" fa fa-times"></i></span>
+                </g:form>
 
             </div>
             <span class="col-lg-1">
