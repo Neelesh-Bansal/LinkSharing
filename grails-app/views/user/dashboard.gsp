@@ -9,6 +9,14 @@
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-body">
+                    <g:if test="${flash.error}">
+                        <g:message message="${flash.error}"></g:message>
+
+                    </g:if>
+                    <g:if test="${flash.message}">
+                        <g:message message="${flash.message}"></g:message>
+
+                    </g:if>
                     <div class="col-lg-3">
                         <ls:userImage height="100" width="100"></ls:userImage>
                     </div>

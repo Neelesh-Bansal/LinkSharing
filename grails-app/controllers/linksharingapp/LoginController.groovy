@@ -34,6 +34,7 @@ class LoginController {
         if(user){
             if(user.active){
                 session.user = user
+                flash.message="Login Successful"
                 redirect(action: "index")
             }
             else{
@@ -61,14 +62,20 @@ class LoginController {
 
         User user = new User(email: email, username: username, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName,photo: params.photo.bytes, active: true, admin: false)
         User.withNewTransaction {
-            if (user.save()) {
-                flash.message = "User Saved Successfully"
-                forward(action: 'home')
+            if (user.validate()) {
+                if (user.save()) {
+                    flash.message = "User Saved Successfully"
+                    forward(action: 'home')
+                } else {
+                    flash.error = "User Not Saved"
+                    forward(action: 'home')
+                }
             } else {
-                flash.error = "User Not Saved"
-                forward(action: 'home')
+
+                render(view: '/login/index',model: [user:user])
             }
         }
+
     }
 
 

@@ -16,13 +16,6 @@
           <input id="inputSearch" placeholder="Search" name="key">
           <span><i class=" fa fa-times"></i></span>
       </g:form>
-    %{--<span class="search">--}%
-        %{--<span class="fa fa-search"></span>--}%
-        %{--<input placeholder="Search ">--}%
-        %{--<span>--}%
-            %{--<i class=" fa fa-times"></i>--}%
-        %{--</span>--}%
-    %{--</span>--}%
   </div>
 </g:if>
 <g:else>

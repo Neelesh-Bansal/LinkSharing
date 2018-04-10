@@ -47,6 +47,12 @@ class UserController {
                 User user = User.find(session.user)
                 Long id = user.id
                 User.executeUpdate("update User set password=:pass where id=:id", [pass: pass1, id: id])
+                flash.message="Password Changed successfully"
+                render(view: '/user/dashboard')
+            }
+            else{
+                flash.error="password not matching"
+                render(view: '/user/dashboard')
             }
         }
     }
