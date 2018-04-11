@@ -3,7 +3,6 @@
 <asset:stylesheet href="application.css"/>
 <asset:javascript src="application.js"/>
 
-%{--<meta name="layout" content="application">--}%
 <body>
     <div class="col-lg-5">
         <div class="row">
@@ -229,89 +228,19 @@
     </div>
 
 
-
-
-
-
     <div class="col-lg-7">
         <div class="panel panel-default">
             <div class="panel-heading">
                 Inbox
             </div>
             <div class="panel-body">
-                <div class="row" style="padding-bottom: 10px">
-                    <div class="col-lg-3">
-                        <asset:image class="img-responsive" src="image.jpg" alt="neelesh"/>
-                    </div>
-                    <div class="col-lg-9">
-                        <span class="text">Neelesh Bansal</span>
-                        <span class="text-muted">@neelesh 5min</span>
-                        <span class="text-primary" style="float: right">Grails</span>
-                        <div class="text">
-                            <p>
-                                This is Neelesh Bansal. Welcome to you all
-                                over here and its time to say good bye wef
-                            </p>
-                        </div>
-                        <div>
-                            <span class="fab fa-facebook fa-1x">   </span>
-                            <span class="fab fa-tumblr fa-1x">  </span>
-                            <span class="fab fa-google-plus-g fa-1x">  </span>
-                        </div>
-
-                        <div class="col-lg-2">
-                            <a href="#" class="text-primary" style="text-decoration: underline;">Download</a>
-                        </div>
-                        <div class="col-lg-3">
-                            <a href="#" class="text-primary" style="text-decoration: underline;">View Full Site</a>
-                        </div>
-                        <div class="col-lg-3">
-                            <a href="#" class="text-primary" style="text-decoration: underline;">Mark As Read</a>
-                        </div>
-                        <div class="col-lg-2">
-                            <a href="#" class="text-primary" style="text-decoration: underline;">View Post</a>
-                        </div>
-                    </div>
-                </div>
+                <g:render template="inbox" collection="${unReadItems}" var="unReadResource"></g:render>
             </div>
-            <div class="row">
-                <div class="col-lg-3">
-                    <asset:image class="img-responsive" src="image.jpg" alt="neelesh"/>
-                </div>
-                <div class="col-lg-9">
-                    <span class="text">Neelesh Bansal</span>
-                    <span class="text-muted">@neelesh 5min</span>
-                    <span class="text-primary" style="float: right">Grails</span>
-                    <div class="text">
-                        <p>
-                            This is Neelesh Bansal. Welcome to you all
-                            over here and its time to say good bye wef
-                        </p>
-                    </div>
-                    <div>
-                        <span class="fab fa-facebook fa-1x">   </span>
-                        <span class="fab fa-tumblr fa-1x">  </span>
-                        <span class="fab fa-google-plus-g fa-1x">  </span>
-                    </div>
 
-                    <div class="col-lg-2">
-                        <a href="#" class="text-primary" style="text-decoration: underline;">Download</a>
-                    </div>
-                    <div class="col-lg-3">
-                        <a href="#" class="text-primary" style="text-decoration: underline;">View Full Site</a>
-                    </div>
-                    <div class="col-lg-3">
-                        <a href="#" class="text-primary" style="text-decoration: underline;">Mark As Read</a>
-                    </div>
-                    <div class="col-lg-2">
-                        <a href="#" class="text-primary" style="text-decoration: underline;">View Post</a>
-                    </div>
-                </div>
+            <div class="panel-footer">
+                <br/>
+                <g:paginate total="${total}" prev="Previous" next="Next" controller="user" action="index" max="5"/><br/>
             </div>
-        </div>
-    </div>
-</div>
-</div>
 </div>
 </div>
 </body>

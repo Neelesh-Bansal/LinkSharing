@@ -49,19 +49,22 @@ class LinksharingTagLib {
     }
 
     def subscriptionCount = { attrs,body ->
-        if(session.user && attrs.topicId){
+        if(params.username && attrs.topicId){
             Topic topic = Topic.findById(attrs.topicId.toLong())
             out << body() << topic.subscriptions.size()
         }
-        else if (session.user){
-            out << body() << session.user.subscriptions.size()
+        else if (attrs.username){
+            User user = User.findByUsername(attrs.username)
+            List<Subscription> subscriptions = Subscription.findAllByUser(user)
+            out << body() << subscriptions.size()
         }
     }
 
 
     def resourceCount = {attrs,body ->
-        List<Resource> resources = Resource.findAllByTopic(attrs.topicId.toLong())
-        out << body() << resources.size()
+        List<Resource> resources1 = Resource.findAllByCreatedBy(attrs.user11)
+        //List<Resource> resources = Resource.findAllByTopic(attrs.topicId.toLong())
+        out << body() << resources1.size()
     }
 
     def topicCount = {attrs,body ->
@@ -69,6 +72,6 @@ class LinksharingTagLib {
     }
 
     def userImage = { attrs, body ->
-        out << "<img src='${createLink(controller: 'user', action: 'fetchUserImage', params: [username: session.user.username])}' " + " height='${attrs.height}' width='${attrs.width}'>" }
+        out << "<img src='${createLink(controller: 'user', action: 'fetchUserImage', params: [username: attrs.username])}' " + " height='${attrs.height}' width='${attrs.width}'>" }
 
 }

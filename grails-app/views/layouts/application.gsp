@@ -76,12 +76,16 @@
             <span class="col-lg-3 dropdown">
 
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                    <i class="fas fa-user" style="font-size:24px"></i>
+                    %{--<i class="fas fa-user" style="font-size:24px"></i>--}%
+                    <ls:userImage class="img-circle" height="25" width="25"></ls:userImage>
                     ${session.user.firstName}
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><g:link controller="user" action="profile">Profile</g:link> </li>
+                    <g:if test="${session.user.admin}">
+                        <li><g:link controller="admin" action="userList">View All Users</g:link> </li>
+                    </g:if>
+                    <li><g:link controller="user" action="profile">Edit Profile</g:link> </li>
                     <li><a href="#">Users</a></li>
                     <li><a href="#">Topic</a></li>
                     <li><a href="#">Posts</a></li>

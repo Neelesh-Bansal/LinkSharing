@@ -7,6 +7,7 @@ class LoginController {
 
     static defaultAction = "home"
     def sendMailService
+    LoginService loginService
 
     def home(){
         println("Home.....")
@@ -30,10 +31,14 @@ class LoginController {
     }
 
     def loginHandler(String username, String password) {
-        User user = User.findByUsernameAndPassword(username,password)
+        User user = loginService.loginUser(username,password)
+        //User user = User.findByUsernameAndPassword(username,password)
         if(user){
             if(user.active){
                 session.user = user
+                if(user.username=="Admin"){
+                    redirect(controller:'admin', action: 'index')
+                }
                 flash.message="Login Successful"
                 redirect(action: "index")
             }

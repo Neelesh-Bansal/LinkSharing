@@ -7,11 +7,23 @@ import linksharingapp.vo.TopicVO
 class UserController {
 
     def assetResourceLocator
+    UserService userService
     def index() {
         if(session.user) {
             List<TopicVO> topicVOList = Topic.getTrendingTopics()
-//        List<Topic> topics = User.getSubscribedTopic()
-            render(view: '/user/dashboard', model: [topicList: topicVOList])
+            User user = User.findById(session.user.id)
+            def max = params.max?:5
+            def offset = params.offset?:0
+            def unReadItems = ReadingItem.createCriteria().list(max: max,offset: offset){
+                eq("user",user)
+            }
+            println(unReadItems)
+
+            println("-----")
+
+            println(unReadItems.getTotalCount())
+            render(view: '/user/dashboard', model: [topicList: topicVOList,unReadItems:unReadItems,total:unReadItems.getTotalCount()])
+
         }
         else{
             flash.error = "Login to continue"
@@ -97,6 +109,20 @@ class UserController {
         out.write(photo)
         out.flush()
         out.close()
+    }
+
+    def state(){
+        println("][][][][][][][][")
+        println(params.id)
+        params.id
+        if(userService.changeState(new Integer(params.id))){
+            flash.message = "state changed"
+            redirect(controller: 'user',action: 'index')
+        }
+        else{
+            flash.error = "state not changed"
+            redirect(controller: 'user',action: 'index')
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 <div class="row" style="padding-bottom:10px">
     <div class="col-lg-3">
+        %{--<ls:userImage height="100" width="100"></ls:userImage>--}%
         <asset:image class="img-responsive" src="image.jpg" alt="neelesh"/>
         %{--<img src="${demo3.createdBy.photo}" name="photo" >--}%
     </div>
@@ -13,7 +14,8 @@
         </div>
         <div class="col-lg-4">
             <span class="text-muted">Subscriptions</span>
-            <p class="text-primary">50</p>
+            <ls:subscriptionCount topicId="${demo3.id}"></ls:subscriptionCount>
+            %{--<p class="text-primary">${demo3.topic}</p>--}%
         </div>
         <div class="col-lg-4">
             <span class="text-muted">Posts</span>

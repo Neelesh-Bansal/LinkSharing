@@ -1,11 +1,9 @@
 package linksharingapp
 
 import linksharingapp.co.SearchCO
-
 import java.beans.Transient
 
 class User {
-
     String name
     String email
     String username
@@ -82,11 +80,7 @@ class User {
     }
 
 
-
-
-
     static transients = ['name','confirmPassword','subscribedTopic']
-
 
     @Override
     public String toString() {
