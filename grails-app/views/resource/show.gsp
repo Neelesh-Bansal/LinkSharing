@@ -101,8 +101,6 @@
             Trending Topics
         </div>
         <ls:trendingTopics/>
-        %{--<ls:getSubscribedTrendingTopics></ls:getSubscribedTrendingTopics>--}%
-        %{--<ls:getUnsubscribedTrendingTopics></ls:getUnsubscribedTrendingTopics>--}%
     </div>
 </div>
 

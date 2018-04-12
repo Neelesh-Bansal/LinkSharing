@@ -70,7 +70,6 @@ class TopicController {
         Topic topic = Topic.load(id)
          Topic.withNewTransaction {
              if (topic) {
-                 println(topic.name)
                  topic.delete()
                  render([success: "Topic Deleted Successfully"] as JSON)
              } else {

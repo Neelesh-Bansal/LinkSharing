@@ -13,13 +13,9 @@ class ResourceController {
 
     //Q24 Plugin
     def save(Long id,String des){
-        println(id)
-        println("In resource edit mode")
         Resource resource = Resource.findById(id)
-        println(resource)
         Resource.withNewTransaction {
             if (resource) {
-                println("Inside Saving")
                 Resource.executeUpdate("update Resource set description=:des where id=:id", [des: des, id: id])
                 flash.message = "Description edit successfully"
                 redirect(controller: 'user', action: 'index')
@@ -79,9 +75,7 @@ def show2(){
 
       //Search resource functionality
     def search(String key) {
-        println("Inside search")
         Topic topic = Topic.findByName(key)
-        println(topic)
         if (topic){
             SearchCO co = new ResourceSearchCO()
             co.topicId=topic.id

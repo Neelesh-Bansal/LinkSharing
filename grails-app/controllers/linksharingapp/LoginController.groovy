@@ -10,7 +10,6 @@ class LoginController {
     LoginService loginService
 
     def home(){
-        println("Home.....")
         List<Resource> resources1 = Resource.topPost()
         List<Resource> resources2 = Resource.recentShares()
         render (view: 'index', model: [resourceList1:resources1,resourceList2:resources2])
@@ -96,15 +95,11 @@ class LoginController {
         User.withNewTransaction {
 
             User user = User.findByEmailAndUsername(params.email, params.username)
-            println(user)
             if (user) {
 
                 Util util = new Util()
                 def newPassword = Util.randomPassword
                 String pass=newPassword
-                println(pass)
-
-
 
 
                 EmailDTO emailDTO = new EmailDTO(to: params.email, subject: "Password Reset", from: "linksharing1@gmail.com", content: "Your new password is : ${newPassword}")
@@ -112,7 +107,6 @@ class LoginController {
 
 
                 User.executeUpdate("update User set password=:password where id=:id", [password: pass, id: user.id])
-                println("Inside password changing mode 3")
                 flash.message = "Mail sent successlly"
                 forward(action: 'home')
             } else {

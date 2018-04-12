@@ -48,10 +48,6 @@
                     </h6>
                 </div>
 
-                %{--<span type="img" class="glyphicon glyphicon-trash pull-right fa-2x"--}%
-                %{--style="margin-left: 10px;color: #007efc;">--}%
-                %{--<a href="#"></a>--}%
-                %{--</span>--}%
 
                 <span class="col-lg-1">
                     <a href="#myModal2" data-toggle="modal" data-target="#myModal2">

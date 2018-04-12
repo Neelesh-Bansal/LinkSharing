@@ -17,11 +17,6 @@ class UserController {
             def unReadItems = ReadingItem.createCriteria().list(max: max,offset: offset){
                 eq("user",user)
             }
-            println(unReadItems)
-
-            println("-----")
-
-            println(unReadItems.getTotalCount())
             render(view: '/user/dashboard', model: [topicList: topicVOList,unReadItems:unReadItems,total:unReadItems.getTotalCount()])
 
         }
@@ -107,10 +102,8 @@ class UserController {
         User user = User.findByUsername(params.username)
         byte[] photo
         if(!user?.photo){
-            println("Photo Not Found")
             photo = assetResourceLocator.findAssetForURI('image.jpg').byteArray
         }else {
-            println("Photo Found")
             photo= user.photo
         }
         OutputStream out = response.getOutputStream()
@@ -120,7 +113,6 @@ class UserController {
     }
 
     def state(){
-        println(params.id)
         params.id
         if(userService.changeState(new Integer(params.id))){
             flash.message = "state changed"
