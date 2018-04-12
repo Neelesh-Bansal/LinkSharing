@@ -79,6 +79,11 @@ class LinksharingTagLib {
             List<Subscription> subscriptions = Subscription.findAllByUser(user)
             out << body() << subscriptions.size()
         }
+        else{
+            User user = session.user
+            List<Subscription> subscriptions = Subscription.findAllByUser(user)
+            out << body() << subscriptions.size()
+        }
     }
 
 
@@ -91,6 +96,11 @@ class LinksharingTagLib {
             Topic topic = Topic.findById(attrs.id)
             List<Resource> resources1 = Resource.findAllByTopic(topic)
             //List<Resource> resources = Resource.findAllByTopic(attrs.topicId.toLong())
+            out << body() << resources1.size()
+        }
+        else {
+            User user = session.user
+            List<Resource> resources1 = Resource.findAllByCreatedBy(user)
             out << body() << resources1.size()
         }
     }

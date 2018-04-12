@@ -5,7 +5,11 @@
 
         <div class="col-sm-9">
 
-            <a href="#" class="pull-left">${topicc.name}</a>
+            <g:form controller="topic" action="edit">
+                <g:hiddenField name="id" value="${topicc.id}"></g:hiddenField>
+                <g:textField name="topicname" value="${topicc.name}"></g:textField>
+                <g:submitButton name="edit" value="Edit"></g:submitButton>
+            </g:form>
             <br>
 
             <div class="row">
@@ -49,12 +53,14 @@
                 %{--<a href="#"></a>--}%
                 %{--</span>--}%
 
-                <span type="img" class="fa fa-file pull-right fa-2x"
-                      style="margin-left: 10px;  margin-right: 5px;color: #007efc;">
-
+                <span class="col-lg-1">
+                    <a href="#myModal2" data-toggle="modal" data-target="#myModal2">
+                        <i class="far fa-envelope" style="font-size:24px"></i>
+                    </a>
                 </span>
 
-                <span type="img" class="fa fa-envelope pull-right fa-2x" style="margin-left: 10px;color: #007efc;">
+                <g:render template="/layouts/sendInvitation"></g:render>
+
 
                 </span>
 

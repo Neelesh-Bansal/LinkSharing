@@ -10,7 +10,8 @@
             <span class="fab fa-facebook fa-1x">   </span>
             <span class="fab fa-tumblr fa-1x">  </span>
             <span class="fab fa-google-plus-g fa-1x">  </span>
-            <a href="#" class="text-primary" style="text-decoration: underline;float: right">View post</a>
+            <a href="${createLink(controller: 'resource',action: 'show',id:demo4.id)}" class="text-primary pull-right"
+               style="text-decoration: underline">view post</a>
             <g:if test="${session.user.id==demo4.createdBy.id}">
                 <span class="col-lg-1">
                     <a href="#myModal6" data-toggle="modal" data-target="#myModal6">

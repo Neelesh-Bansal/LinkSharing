@@ -8,14 +8,14 @@
 
                     <div class="col-sm-9">
 
-                        <a href="#" class="pull-left">${topicc.name}</a>
+                        <a href="${createLink(controller: 'topic' ,action: 'show',id: topicc.id)}" >${topicc.name}</a>
                         <br>
 
                         <div class="row">
                             <div class="col-sm-6">
                                 <h6 class="text-muted">${topicc.createdBy.name}</h6>
 
-                                <g:link controller="subscription" action="subscriptionDelete"
+                                <g:link controller="subscription" action="delete"
                                         id="${topicc.id}">Unsubscribe</g:link>
                             </div>
 
@@ -35,8 +35,13 @@
                                     </p>
                                 </h6>
                             </div>
-                            <span type="img" class="fa fa-envelope pull-right fa-2x"
-                                  style="margin-left: 10px;color: #007efc;"></span>
+                            <span class="col-lg-1">
+                                <a href="#myModal2" data-toggle="modal" data-target="#myModal2">
+                                    <i class="far fa-envelope" style="font-size:24px"></i>
+                                </a>
+                            </span>
+
+                            <g:render template="/layouts/sendInvitation"></g:render>
 
                             <select class="pull-right">
                                 <option>Serious</option>

@@ -12,10 +12,10 @@
                 </div>
                 <div class="col-lg-4">
                     <span class="text-muted">Subscriptions</span>
-                    <p class="text-primary">50</p>
+                    <ls:subscriptionCount username="${demo6.username}"></ls:subscriptionCount>
                 </div>
                 <div class="col-lg-4">
                     <span class="text-muted">Posts</span>
-                    <p class="text-primary">30</p>
+                    <ls:resourceCount user11="${demo6}"></ls:resourceCount>
                 </div>
             </div>

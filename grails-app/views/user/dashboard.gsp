@@ -22,19 +22,19 @@
 
                 <div class="col-lg-9">
                     <div class="text">
-                        <h4>Neelesh Bansal</h4>
+                        <h4>${session.user.firstName} ${session.user.lastName}</h4>
                     </div>
 
-                    <div class="text-muted">@neelesh</div>
+                    <div class="text-muted">${session.user.username}</div>
 
                     <div class="col-lg-4">
                         <span class="text-muted">Subscriptions</span>
-                        <span class="text-primary">50</span>
+                        <ls:subscriptionCount></ls:subscriptionCount>
                     </div>
 
                     <div class="col-lg-3">
-                        <span class="text-muted">Topics</span>
-                        <span class="text-primary">30</span>
+                        <span class="text-muted">Resources</span>
+                        <ls:resourceCount></ls:resourceCount>
                     </div>
 
                 </div>

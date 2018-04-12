@@ -6,7 +6,7 @@
     </div>
     <div class="col-lg-9">
         <div class="text-primary">
-            <a href="${createLink(controller: 'topic' ,action: 'show',id: demo3.id)}" >Grails</a>
+            <a href="${createLink(controller: 'topic' ,action: 'show',id: demo3.id)}" >${demo3.name}</a>
         </div>
         <div class="col-lg-4" style="padding-left: 0px">
             <span class="text-muted">@${demo3.createdBy.username} 5min</span>

@@ -13,16 +13,15 @@
                      <div class="text-muted">@${user.username}</div>
                             <div class="col-lg-4">
                             <span class="text-muted">Subscriptions</span>
-                             <span class="text-primary">50</span>
+                             <ls:subscriptionCount username="${user.username}"></ls:subscriptionCount>
                             </div>
                             <div class="col-lg-3">
-                              <span class="text-muted">Topics</span>
-                                <span class="text-primary">30</span>
+                              <span class="text-muted">Resouces</span>
+                                <ls:resourceCount user11="${user}"></ls:resourceCount>
                              </div>
-
-</div>
-</div>
-</div>
+               </div>
+        </div>
+   </div>
 </div>
 
 

@@ -38,15 +38,15 @@ class SubscriptionController {
     }
 
     def delete(Long id) {
-        Subscription subscription = Subscription.get(id)
+        Subscription subscription = Subscription.load(id)
         Subscription.withNewTransaction {
             if (subscription) {
-                subscription.delete()
+                subscription.delete(flush:true)
                 flash.message="Success"
-                render(controller: 'login', action: 'index')
+                redirect(controller: 'login', action: 'index')
             } else {
                 flash.error = "Error while deleting"
-                render(controller: 'login', action: 'index')
+                redirect(controller: 'login', action: 'index')
             }
         }
     }

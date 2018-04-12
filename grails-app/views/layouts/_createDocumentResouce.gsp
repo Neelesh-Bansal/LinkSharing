@@ -8,23 +8,19 @@
                 <h4 class="modal-title">Create Share Document</h4>
             </div>
             <div class="modal-body">
-                <g:form controller="documentResource" action="save" method="POST">
+                <g:uploadForm controller="documentResource" action="save" method="POST">
 
                     <label>Document*:</label>
-                    <g:uploadForm name="file">
-                        <input type="file" name="file" />
-                    </g:uploadForm>
-
-
+                    <input type="file" name="document" />
                     <label>Description*:</label>
-                    <g:textArea name="des" value="Description*" rows="10" cols="65"/>
+                    <g:textArea name="description" value="Description*" rows="10" cols="65"/>
                     <br>
                     <label>Topic*:</label>
-                    <g:select name="topic" optionKey="id" optionValue="name" from="${session.user.getSubscribedTopics()}"/>
+                    <g:select name="topicId" optionKey="id" optionValue="name" from="${session.user.getSubscribedTopics()}"/>
                     <br><br>
                     <g:submitButton name="button" value="Save"/>
                     <g:actionSubmit value="Cancel" controller="login" action="home"/>
-                </g:form>
+                </g:uploadForm>
             </div>
         </div>
     </div>

@@ -10,6 +10,15 @@ class TopicController {
     def sendMailService
 
     def index() {}
+    def edit(){
+        Topic.withNewTransaction {
+            Long id = params.id.toLong()
+            String name = params.topicname
+            Topic.executeUpdate("update Topic set name=:name where id=:id", [name: name, id: id])
+            flash.message="Topic Edit Successfully"
+            redirect(controller: 'user', action: 'index')
+        }
+    }
 
 //    def show(Long id) {
 //        println(id)
@@ -94,7 +103,7 @@ class TopicController {
         List<Topic> topics = Topic.findAllByCreatedBy(session.user)
         render(topics.name)
     }
-    
+
     def join(Long id) {
         User user = User.findByEmail(params.email)
         Topic topic = Topic.findById(params.link)
@@ -112,6 +121,7 @@ class TopicController {
     }
 
 
+
     def invite() {
         Topic topic1 = Topic.findById(params.topic)
 
@@ -122,12 +132,9 @@ class TopicController {
             sendMailService.sendInvitation(emailDTO)
             flash.message = "Invitation Send"
             redirect(controller: 'user', action: 'index')
-
-
         } else {
             flash.error = "Error while inviting user"
             redirect(controller: 'user', action: 'index')
         }
     }
-
 }

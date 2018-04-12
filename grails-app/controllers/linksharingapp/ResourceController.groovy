@@ -56,13 +56,15 @@ def show2(){
 }
     def show(Long id){
         Resource resource=Resource.get(id)
+        println("ihuhuhuhuhui")
+
 //        RatingInfoVO ratingInfoVO= resource.setRatingInfoVO(resource)
 //        render("Total Votes--${ratingInfoVO.totalVotes}")
 //        render("Average Score--${ratingInfoVO.averageScore}")
 //        render("Total Score--${ratingInfoVO.totalScore}")
-        if(session.user && resource.canViewBy(session.user)){
+        if(session.user){
             String resourceType = Resource.findTypeOfResource(id)
-            render(view: '',model: [resource:resource,resourceType : resourceType])
+            render(view: '/resource/show',model: [resource:resource,resourceType : resourceType])
         }
         else if(resource.topic.isPublic()){
             String resourceType = Resource.findTypeOfResource(id)
