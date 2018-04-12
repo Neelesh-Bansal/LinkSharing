@@ -7,21 +7,15 @@ class UserService {
 
 
     def changeState(Integer id){
-        println("in service")
+        println("in service--->")
         println(id)
         User user = User.findById(id)
         println(user)
-
-                if (user.active) {
-                    user.active = false
-                } else {
-                    user.active = true
-                }
-        User.withNewTransaction {
-                 user.save()
-                    return true
-
-            }
+        if (user.active) {
+            User.executeUpdate("update User set active=:new where id=:id", [new: false, id: user.id])
+        } else {
+            User.executeUpdate("update User set active=:new where id=:id", [new: true, id: user.id])
+        }
     }
 
 

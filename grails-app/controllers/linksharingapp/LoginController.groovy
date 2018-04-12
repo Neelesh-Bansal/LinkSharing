@@ -92,24 +92,33 @@ class LoginController {
 
 
     def sendingMail() {
-        if(User.findByEmailAndUsername(params.email,params.username))
-        {
 
-            Util util = new Util()
-            def newPassword = Util.randomPassword
+        User.withNewTransaction {
 
-            EmailDTO emailDTO = new EmailDTO(to: params.email, subject: "Password Reset" ,from:"linksharing1@gmail.com",content:"Your new password is : ${newPassword}")
-            sendMailService.sendMail(emailDTO)
+            User user = User.findByEmailAndUsername(params.email, params.username)
+            println(user)
+            if (user) {
+
+                Util util = new Util()
+                def newPassword = Util.randomPassword
+                String pass=newPassword
+                println(pass)
 
 
-            flash.message="Mail sent successlly"
-            forward(action: 'home')
-        }
 
-        else
-        {
-            flash.error="Mail not sent please check username and email"
-            forward(action: 'home')
+
+                EmailDTO emailDTO = new EmailDTO(to: params.email, subject: "Password Reset", from: "linksharing1@gmail.com", content: "Your new password is : ${newPassword}")
+                sendMailService.sendMail(emailDTO)
+
+
+                User.executeUpdate("update User set password=:password where id=:id", [password: pass, id: user.id])
+                println("Inside password changing mode 3")
+                flash.message = "Mail sent successlly"
+                forward(action: 'home')
+            } else {
+                flash.error = "Mail not sent please check username and email"
+                forward(action: 'home')
+            }
         }
     }
 

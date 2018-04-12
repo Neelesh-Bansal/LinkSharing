@@ -14,19 +14,19 @@ class ResourceController {
     //Q24 Plugin
     def save(Long id,String des){
         println(id)
-        println("In save mode")
-        Resource resource = Resource.findById(id)//need not to call save operation
+        println("In resource edit mode")
+        Resource resource = Resource.findById(id)
         println(resource)
-        if(resource) {
-            println("Inside Saving")
-            resource.description = des
-            resource.save()
-            flash.message = "Description edit successfully"
-            redirect(controller: 'user', action: 'index')
-        }
-        else{
-            flash.error = "post not found"
-            redirect(controller: 'user', action: 'index')
+        Resource.withNewTransaction {
+            if (resource) {
+                println("Inside Saving")
+                Resource.executeUpdate("update Resource set description=:des where id=:id", [des: des, id: id])
+                flash.message = "Description edit successfully"
+                redirect(controller: 'user', action: 'index')
+            } else {
+                flash.error = "post not found"
+                redirect(controller: 'user', action: 'index')
+            }
         }
     }
 

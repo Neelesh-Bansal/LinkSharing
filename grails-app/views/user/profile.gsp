@@ -39,19 +39,19 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="fname">FirstName*:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="fname" id="fname" placeholder="${user.firstName}">
+                            <input type="text" class="form-control" name="fname" id="fname" value="${user.firstName}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="lname">LastName*:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="lname" id="lname" placeholder="${user.lastName}">
+                            <input type="text" class="form-control" name="lname" id="lname" value="${user.lastName}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-sm-2" for="uname">Username*:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="uname" id="uname" placeholder="${user.username}">
+                            <input type="text" class="form-control" name="uname" id="uname" value="${user.username}">
                         </div>
                     </div>
 

@@ -35,7 +35,7 @@
 
 
      <div class="panel panel-default">
-                <div class="panel-heading">Recent shares</div>
+                <div class="panel-heading">Posts:"${resource1[0].topic.name}"</div>
                 <div class="panel-body">
 
                     <div class="row" style="padding-bottom: 8px">

@@ -49,7 +49,15 @@ class UserController {
 
     //used for updating current session user profile
     def update(String fname,String lname, String uname){
-
+        println("Inside profile update-->")
+        User.withNewTransaction {
+                User user = session.user
+                Long id = user.id
+                User.executeUpdate("update User set firstName=:fname,lastName=:lname,username=:uname where id=:id", [fname: fname,lname:lname,uname:uname, id: id])
+                session.user = User.findById(id)
+                flash.message="Profile Edit successfully"
+                redirect(controller: 'user',action: 'index')
+            }
     }
 
     //used for updating current session user password
@@ -60,11 +68,11 @@ class UserController {
                 Long id = user.id
                 User.executeUpdate("update User set password=:pass where id=:id", [pass: pass1, id: id])
                 flash.message="Password Changed successfully"
-                render(view: '/user/dashboard')
+                redirect(controller: 'user',action: 'index')
             }
             else{
                 flash.error="password not matching"
-                render(view: '/user/dashboard')
+                redirect(controller: 'user',action: 'index')
             }
         }
     }
@@ -112,7 +120,6 @@ class UserController {
     }
 
     def state(){
-        println("][][][][][][][][")
         println(params.id)
         params.id
         if(userService.changeState(new Integer(params.id))){

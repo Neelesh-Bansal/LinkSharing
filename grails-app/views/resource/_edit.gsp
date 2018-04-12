@@ -10,7 +10,7 @@
             <div class="modal-body">
                 <g:form controller="resource" action="save" method="POST">
                     <g:textField name="id" value="${demo4.id}"></g:textField>
-                    <textarea name="des" placeholder="${demo4.description}" rows="4" cols="24"></textarea>
+                    <textarea name="des" value="${demo4.description}" rows="4" cols="24"></textarea>
                     </br>
                     <g:submitButton name="button" value="Save"/>
                     <g:actionSubmit value="Cancel" controller="user" action="index"/>
