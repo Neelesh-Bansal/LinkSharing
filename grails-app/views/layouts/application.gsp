@@ -2,7 +2,7 @@
 <head>
      <asset:stylesheet src="header.css"/>
     <asset:stylesheet href="application.css"/>
-    <asset:javascript src="application.js"/>
+     <asset:javascript src="application.js?compile=false"/>
 </head>
 <body>
 <g:if test="${!session.user}">

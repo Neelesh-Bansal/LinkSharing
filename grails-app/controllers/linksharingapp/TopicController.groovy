@@ -1,5 +1,6 @@
 package linksharingapp
 
+import grails.converters.JSON
 import linksharingapp.co.ResourceSearchCO
 import linksharingapp.dto.EmailDTO
 import linksharingapp.enumeration.Visibility
@@ -45,7 +46,7 @@ class TopicController {
 
         List<Subscription> subscriptionsList = Subscription.findAllByTopic(topic)
 
-        List<User> users=[]
+        List<User> users = []
         subscriptionsList.each {
             users.add(it.user)
         }
@@ -58,21 +59,22 @@ class TopicController {
 
     def delete(Long id) {
         Topic topic = Topic.load(id)
-        /* Topic.withNewTransaction {*/
-        if (topic) {
-            println(topic.name)
-            topic.delete()
-            render("Topic Deleted Successfully")
-        } else {
-            render("Topic Not Found")
-        }
+         Topic.withNewTransaction {
+             if (topic) {
+                 println(topic.name)
+                 topic.delete()
+                 render([success: "Topic Deleted Successfully"] as JSON)
+             } else {
+                 render([error: "Topic Not Found"] as JSON)
+             }
+         }
     }
 
 
     def save(String name, String visibility) {
         Visibility visibility1 = Visibility.stringToEnum(visibility)
         Topic topic1 = new Topic(name: name, createdBy: session.user, visibility: visibility1)
-        if(session.user) {
+        if (session.user) {
             if (topic1.save()) {
                 Subscription subscription = new Subscription(topic: topic1, user: session.user, seriousness: Seriousness.VERY_SERIOUS)
                 subscription.save()
@@ -82,8 +84,7 @@ class TopicController {
                 flash.message = "New Topic Not Saved"
                 redirect(controller: 'user', action: 'index')
             }
-        }
-        else{
+        } else {
             flash.error = "Login to continue"
             render(controller: 'login', action: 'index')
         }
@@ -93,48 +94,38 @@ class TopicController {
         List<Topic> topics = Topic.findAllByCreatedBy(session.user)
         render(topics.name)
     }
+    
+    def join(Long id) {
+        User user = User.findByEmail(params.email)
+        Topic topic = Topic.findById(params.link)
+        Subscription subscription = new Subscription(topic: topic, user: user, seriousness: Seriousness.SERIOUS)
 
-
-    //need to specify the user to whom we are going to do this subscribe operation
-    def join(Long id)
-    {
-        Topic topic=Topic.findById(id)
-        Subscription subscription = new Subscription(topic: topic , user: user, seriousness: Seriousness.SERIOUS)
-
-        if (subscription.validate())
-        {
+        if (subscription.validate()) {
             subscription.save()
-            flash.message="Subscribed for the topic successfully"
 
-        }
-
-        else
-        {
-            flash.error="Error while subscribing for the topic"
+            flash.message = "Subscribed for the topic successfully"
+            render("Thanks for subscribing the topic")
+        } else {
+            flash.error = "Error while subscribing for the topic"
 
         }
     }
 
 
-
-    def invite()
-    {
+    def invite() {
         Topic topic1 = Topic.findById(params.topic)
 
-        if (topic1 && User.findByEmail(params.to))
-        {
+        if (topic1 && User.findByEmail(params.to)) {
 
-            EmailDTO emailDTO = new EmailDTO(to: params.to, subject:"INVITATION" ,from:"linksharing1@gmail.com" , linkId: topic1.id , content: "Please subscribe for the Topic")
+            EmailDTO emailDTO = new EmailDTO(to: params.to, subject: "INVITATION", from: "linksharing1@gmail.com", linkId: topic1.id, content: "Please subscribe for the Topic")
 
             sendMailService.sendInvitation(emailDTO)
             flash.message = "Invitation Send"
             redirect(controller: 'user', action: 'index')
 
 
-        }
-        else
-        {
-            flash.error= "Error while inviting user"
+        } else {
+            flash.error = "Error while inviting user"
             redirect(controller: 'user', action: 'index')
         }
     }

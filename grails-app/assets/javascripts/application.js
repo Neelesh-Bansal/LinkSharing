@@ -19,3 +19,29 @@ if (typeof jQuery !== 'undefined') {
         });
     })(jQuery);
 }
+
+
+
+$(document).ready(function () {
+    $(".topicdelete").click(function (e) {
+        var id = $(this).attr('id');
+        $.ajax({
+            type: "GET",
+            url: "/topic/delete",
+            data: {id: id},
+            contentType: "application/json",
+            success: function (response) {
+                if(response.success){
+                    $("#topic-"+id).remove();
+                    alert(response.success)
+                } else{
+                    alert(response.error)
+                }
+            }, error: function (e) {
+                alert("Error");
+            }
+        });
+
+    });
+
+});
