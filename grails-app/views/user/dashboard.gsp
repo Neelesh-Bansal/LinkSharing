@@ -1,3 +1,4 @@
+<%@ page import="linksharingapp.User" %>
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <asset:stylesheet href="application.css"/>
@@ -145,7 +146,9 @@
 
                 </g:if>
                 <div class="col-lg-3">
-                    <ls:userImage height="100" width="100"></ls:userImage>
+                <% linksharingapp.User user1 = session.user
+%>
+                    <ls:userImage username="${user1.username}" height="100" width="100"></ls:userImage>
                 </div>
 
                 <div class="col-lg-9">

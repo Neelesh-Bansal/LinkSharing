@@ -96,7 +96,9 @@
 
                 <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                     %{--<i class="fas fa-user" style="font-size:24px"></i>--}%
-                    <ls:userImage class="img-circle" height="25" width="25"></ls:userImage>
+                    <% linksharingapp.User user1 = session.user
+                    %>
+                    <ls:userImage username="${user1.username}" class="img-circle" height="25" width="25"></ls:userImage>
                     ${session.user.firstName}
                     <span class="caret"></span>
                 </button>
