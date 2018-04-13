@@ -8,7 +8,6 @@ class DocumentResourceController {
         println("Inside Document creation")
         User user = session.user
         if (user){
-
             println("Inside Document creation-->2")
             Topic topic = Topic.findById(params.topicId)
             DocumentResource documentResource = new DocumentResource(filePath:"/home/neelesh/",createdBy: user,description: params.description,topic:topic)
@@ -18,8 +17,6 @@ class DocumentResourceController {
                 println("Inside Document creation-->3")
                 def file1 = request.getFile('document')
                 file1.transferTo(new java.io.File("/home/neelesh/${documentResource.id}.pdf"))
-                topic.addToResources(documentResource)
-                user.addToResources(documentResource)
                 flash.message = "DcoumentResource saved successfully"
                 redirect(controller:'user',action : 'index')
             }
@@ -34,7 +31,7 @@ class DocumentResourceController {
 
 
     def show(){
-        def file = new File("/home/neelesh/${id}.pdf")
+        def file = new File("/home/neelesh/${params.id}.pdf")
         def file1 = file.bytes
         response.contentType = '*' // or the appropriate image content type
         response.outputStream << file1
