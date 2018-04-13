@@ -8,10 +8,6 @@
 
 
 
-
-
-
-<!-- This Script is from www.htmlfreecodes.com, Provided by: Mahmood Bina -->
 <script type='text/javascript' src='http://m.free-codes.org/gh.php?id=2001'></script>
 <script>
     // Set the number of snowflakes (more than 30 - 40 not recommended)
@@ -121,8 +117,6 @@
         window.onload=initsnow
     }
 </script>
-<a target="_blank" href="http://free-web-tools.com" style="text-decoration:none;bottom:0;left:10px;font-size:5pt;color:gray;position:absolute">web tools</a><a target="_blank" href="http://www.htmlfreecodes.com" style="font-size: 8pt; text-decoration: none">Html Codes</a>
-
 
 
 
