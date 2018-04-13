@@ -113,4 +113,11 @@ class LinksharingTagLib {
         out << "<img src='${createLink(controller: 'user', action: 'fetchUserImage', params: [username: attrs.username])}' " + " height='${attrs.height}' width='${attrs.width}'>"
     }
 
+
+    def showCurrentSeriousness = {attrs, body ->
+        Subscription subscription = Subscription.findByTopic(attrs.topic)
+        println(subscription.seriousness)
+        out<< body() << subscription.seriousness
+    }
+
 }

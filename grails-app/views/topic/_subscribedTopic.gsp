@@ -1,3 +1,4 @@
+<%@ page import="linksharingapp.Subscription" %>
 <div class="panel-body">
     <div class="row">
         <div class="col-sm-12">
@@ -42,11 +43,15 @@
                             </span>
 
                             <g:render template="/layouts/sendInvitation"></g:render>
-
-                            <select class="pull-right">
-                                <option>Serious</option>
-                                <option>Casual</option>
-                                <option>Very Serious</option>
+<%
+    linksharingapp.Subscription subscription = Subscription.findByTopicAndUser(topicc,session.user) %>
+                            <select name="updatedSeriousness" id="updateSeriousness"
+                                    onchange="changeSeriousness(${subscription.id}, this.value)">
+                            <option class="placeholder" selected disabled
+                                    value="">${subscription.seriousness}</option>
+                                <option value="${linksharingapp.enumeration.Seriousness.VERY_SERIOUS}">Very Serious</option>
+                                <option value="${linksharingapp.enumeration.Seriousness.SERIOUS}">Serious</option>
+                                <option value="${linksharingapp.enumeration.Seriousness.CASUAL}">Casual</option>
                             </select>
 
                         </div>
@@ -55,3 +60,20 @@
         </div>
     </div>
 </div>
+<script>
+    function changeSeriousness(id,value) {
+        $.ajax({
+            type: 'post',
+            data: {'id': id, 'seriousness': value},
+            url: '/subscription/update',
+            dataType: 'json',
+            success: function(res){
+                alert(res);
+            },
+            error: function(res){
+                $('#message').text('Error!');
+                $('.dvLoading').hide();
+            }
+        });
+    }
+</script>

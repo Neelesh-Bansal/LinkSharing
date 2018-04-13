@@ -1,3 +1,4 @@
+<%@ page import="linksharingapp.Subscription" %>
 <div id="topic-${topicc.id}" class="col-sm-12">
     <div class="row">
         <div class="col-sm-3 fa fa-user fa-5x">
@@ -59,14 +60,49 @@
 
 
                 </span>
-
-                <select class="pull-right">
-                    <option>Serious</option>
-                    <option>Casual</option>
-                    <option>Very Serious</option>
+                <%
+                    linksharingapp.Subscription subscription = linksharingapp.Subscription.findByTopicAndUser(topicc,session.user) %>
+                <select name="updatedSeriousness" id="updateSeriousness"
+                        onchange="changeSeriousness(${subscription.id}, this.value)">
+                    <option class="placeholder" selected disabled
+                            value="">${subscription.seriousness}</option>
+                    <option value="${linksharingapp.enumeration.Seriousness.VERY_SERIOUS}">Very Serious</option>
+                    <option value="${linksharingapp.enumeration.Seriousness.SERIOUS}">Serious</option>
+                    <option value="${linksharingapp.enumeration.Seriousness.CASUAL}">Casual</option>
                 </select>
+
+
+                <select name="updatedVisibility" id="updateVisibility"
+                        onchange="changeVisibility(${topicc.id}, this.value)">
+                    <option class="placeholder" selected disabled
+                            value="">${topicc.visibility}</option>
+                    <option value="${linksharingapp.enumeration.Visibility.PRIVATE}">PRIVATE</option>
+                    <option value="${linksharingapp.enumeration.Visibility.PUBLIC}">PUBLIC</option>
+                </select>
+
+
 
             </div>
         </div>
     </div>
 </div>
+<script>
+    function changeVisibility(id,value) {
+        console.log("inside change")
+        console.log("id is : ", id)
+        console.log("value is : ", value)
+        $.ajax({
+            type: 'post',
+            data: {'id': id, 'visibility': value},
+            url: '/topic/changeVisibility',
+            dataType: 'json',
+            success: function(res){
+                alert(res);
+            },
+            error: function(res){
+                $('#message').text('Error!');
+                $('.dvLoading').hide();
+            }
+        });
+    }
+</script>

@@ -22,17 +22,19 @@ class SubscriptionController {
         }
     }
 
-    def update(Long id, String serious) {
-        Subscription subscription = Subscription.findById(id)
-        Seriousness seriousnes = Seriousness.stringToEnum(serious)
+    def update() {
+        Subscription subscription = Subscription.findById(params.id)
+//        Seriousness seriousnes = Seriousness.stringToEnum(params.value)
         Subscription.withNewTransaction {
             if (subscription) {
-                subscription.seriousness = seriousnes
+                subscription.seriousness = params.seriousness
                 subscription.save()
-                    render("Success")
+                    flash.message="Seriousness Updated"
+                redirect(controller: 'login',action: 'index')
                 }
             else {
-                render("Subscription not found")
+                flash.error="Seriousness Not Updated"
+                redirect(controller: 'login',action: 'index')
             }
         }
     }

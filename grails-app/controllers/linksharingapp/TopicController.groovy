@@ -136,4 +136,21 @@ class TopicController {
             redirect(controller: 'user', action: 'index')
         }
     }
+
+    def changeVisibility(){
+        Topic topic = Topic.findById(params.id)
+        println("In Visibility change")
+        Topic.withNewTransaction {
+            if (topic) {
+                println("Inside Visibility change")
+                topic.visibility = params.visibility
+                topic.save()
+                flash.message = "Visibility Updated"
+                redirect(controller: 'login', action: 'index')
+            } else {
+                flash.error = "Visibility Not Updated"
+                redirect(controller: 'login', action: 'index')
+            }
+        }
+    }
 }
