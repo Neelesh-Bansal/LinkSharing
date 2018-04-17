@@ -9,17 +9,16 @@ class LoginController {
     def sendMailService
     LoginService loginService
 
-    def home(){
+    def home() {
         List<Resource> resources1 = Resource.topPost()
         List<Resource> resources2 = Resource.recentShares()
-        render (view: 'index', model: [resourceList1:resources1,resourceList2:resources2])
+        render(view: 'index', model: [resourceList1: resources1, resourceList2: resources2])
     }
 
     def index() {
-        if(session.user){
-            redirect(controller: 'user' , action: 'index')
-        }
-        else{
+        if (session.user) {
+            redirect(controller: 'user', action: 'index')
+        } else {
             render "session.user doesn't exist"
         }
     }
@@ -30,24 +29,22 @@ class LoginController {
     }
 
     def loginHandler(String username, String password) {
-        User user = loginService.loginUser(username,password)
+        User user = loginService.loginUser(username, password)
         //User user = User.findByUsernameAndPassword(username,password)
-        if(user){
-            if(user.active){
+        if (user) {
+            if (user.active) {
                 session.user = user
-                if(user.username=="Admin"){
-                    redirect(controller:'admin', action: 'index')
+                if (user.username == "Admin") {
+                    redirect(controller: 'admin', action: 'index')
                 }
-                flash.message="Login Successful"
+                flash.message = "Login Successful"
                 redirect(action: "index")
-            }
-            else{
+            } else {
                 flash.error = "Your account is not active"
                 log.error("User not active")
                 render(view: 'error')
             }
-        }
-        else{
+        } else {
             flash.error = "User not found"
             forward(action: 'home')
         }
@@ -56,7 +53,7 @@ class LoginController {
 
     def logout() {
         session.invalidate()
-        forward(controller: 'login' , action: 'home')
+        forward(controller: 'login', action: 'home')
 
     }
 
@@ -64,7 +61,7 @@ class LoginController {
     def register(String firstName, String lastName, String email, String username, String password, String confirmPassword) {
 
 
-        User user = new User(email: email, username: username, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName,photo: params.photo.bytes, active: true, admin: false)
+        User user = new User(email: email, username: username, password: password, confirmPassword: confirmPassword, firstName: firstName, lastName: lastName, photo: params.photo.bytes, active: true, admin: false)
         User.withNewTransaction {
             if (user.validate()) {
                 if (user.save()) {
@@ -76,7 +73,7 @@ class LoginController {
                 }
             } else {
 
-                render(view: '/login/index',model: [user:user])
+                render(view: '/login/index', model: [user: user])
             }
         }
 
@@ -88,8 +85,6 @@ class LoginController {
     }
 
 
-
-
     def sendingMail() {
 
         User.withNewTransaction {
@@ -99,7 +94,7 @@ class LoginController {
 
                 Util util = new Util()
                 def newPassword = Util.randomPassword
-                String pass=newPassword
+                String pass = newPassword
 
 
                 EmailDTO emailDTO = new EmailDTO(to: params.email, subject: "Password Reset", from: "linksharing1@gmail.com", content: "Your new password is : ${newPassword}")

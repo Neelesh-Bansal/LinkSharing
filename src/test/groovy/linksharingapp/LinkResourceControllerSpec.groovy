@@ -12,7 +12,7 @@ class LinkResourceControllerSpec extends Specification implements ControllerUnit
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == true
+        expect: "fix me"
+        true == true
     }
 }

@@ -1,8 +1,5 @@
 package linksharingapp
 
-import linksharingapp.enumeration.Seriousness
-import org.springframework.transaction.annotation.Transactional
-
 class SubscriptionController {
 
     def index() {}
@@ -12,10 +9,9 @@ class SubscriptionController {
         Subscription subscription = new Subscription(user: session.user, topic: topic)
         Subscription.withNewTransaction {
             if (subscription.save()) {
-                flash.message="Success"
+                flash.message = "Success"
                 render(controller: 'login', action: 'index')
-            }
-            else {
+            } else {
                 flash.error = "Unsuccess"
                 render(controller: 'login', action: 'index')
             }
@@ -29,12 +25,11 @@ class SubscriptionController {
             if (subscription) {
                 subscription.seriousness = params.seriousness
                 subscription.save()
-                    flash.message="Seriousness Updated"
-                redirect(controller: 'login',action: 'index')
-                }
-            else {
-                flash.error="Seriousness Not Updated"
-                redirect(controller: 'login',action: 'index')
+                flash.message = "Seriousness Updated"
+                redirect(controller: 'login', action: 'index')
+            } else {
+                flash.error = "Seriousness Not Updated"
+                redirect(controller: 'login', action: 'index')
             }
         }
     }
@@ -43,8 +38,8 @@ class SubscriptionController {
         Subscription subscription = Subscription.load(id)
         Subscription.withNewTransaction {
             if (subscription) {
-                subscription.delete(flush:true)
-                flash.message="Success"
+                subscription.delete(flush: true)
+                flash.message = "Success"
                 redirect(controller: 'login', action: 'index')
             } else {
                 flash.error = "Error while deleting"

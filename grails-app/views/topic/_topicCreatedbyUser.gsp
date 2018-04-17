@@ -23,7 +23,8 @@
                         <input type="hidden" value="${topicc.id}" name="id">
 
                         <div class="form-group">
-                            <input type="button" id="${topicc.id}" value="Delete Topic" class="btn btn-primary topicdelete"/>
+                            <input type="button" id="${topicc.id}" value="Delete Topic"
+                                   class="btn btn-primary topicdelete"/>
                         </div>
                     </form>
 
@@ -59,9 +60,9 @@
                 <g:render template="/layouts/sendInvitation"></g:render>
 
 
-                </span>
+            </span>
                 <%
-                    linksharingapp.Subscription subscription = linksharingapp.Subscription.findByTopicAndUser(topicc,session.user) %>
+                    linksharingapp.Subscription subscription = linksharingapp.Subscription.findByTopicAndUser(topicc, session.user) %>
                 <select name="updatedSeriousness" id="updateSeriousness"
                         onchange="changeSeriousness(${subscription.id}, this.value)">
                     <option class="placeholder" selected disabled
@@ -80,14 +81,12 @@
                     <option value="${linksharingapp.enumeration.Visibility.PUBLIC}">PUBLIC</option>
                 </select>
 
-
-
             </div>
         </div>
     </div>
 </div>
 <script>
-    function changeVisibility(id,value) {
+    function changeVisibility(id, value) {
         console.log("inside change")
         console.log("id is : ", id)
         console.log("value is : ", value)
@@ -96,10 +95,10 @@
             data: {'id': id, 'visibility': value},
             url: '/topic/changeVisibility',
             dataType: 'json',
-            success: function(res){
+            success: function (res) {
                 alert(res);
             },
-            error: function(res){
+            error: function (res) {
                 $('#message').text('Error!');
                 $('.dvLoading').hide();
             }

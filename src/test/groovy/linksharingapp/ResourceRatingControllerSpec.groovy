@@ -12,7 +12,7 @@ class ResourceRatingControllerSpec extends Specification implements ControllerUn
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
+        expect: "fix me"
+        true == false
     }
 }

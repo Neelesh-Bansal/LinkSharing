@@ -8,16 +8,16 @@ class Topic {
 
     String name
     User createdBy
-    static belongsTo = [createdBy:User]
+    static belongsTo = [createdBy: User]
     Date dateCreated
     Date lastUpdated
     Visibility visibility
 
-    static hasMany = [subscriptions:Subscription,resources:Resource]
+    static hasMany = [subscriptions: Subscription, resources: Resource]
 
     static constraints = {
         name(unique: 'createdBy', blank: false, nullable: false)
-        visibility(enum: true,nullable: false)
+        visibility(enum: true, nullable: false)
         createdBy(nullable: false)
     }
 
@@ -26,30 +26,30 @@ class Topic {
         subscriptions fetch: 'join'
     }
 
-     Boolean isPublic(){
-        if(this.visibility == Visibility.PUBLIC)
+    Boolean isPublic() {
+        if (this.visibility == Visibility.PUBLIC)
             return true
 
         return false
     }
 
-    Boolean canViewedBy(User user){
+    Boolean canViewedBy(User user) {
         if (this.isPublic(topic.id) || user.subscriptions.contains(topic) || user.admin)
             return true
 
         return false
     }
 
-    def afterInsert(){
+    def afterInsert() {
         Topic.withNewSession {
-            Subscription subscription = new Subscription(topic: this,user: createdBy, seriousness: Seriousness.VERY_SERIOUS)
+            Subscription subscription = new Subscription(topic: this, user: createdBy, seriousness: Seriousness.VERY_SERIOUS)
             this.addToSubscriptions(subscription)
             subscription.save()
         }
     }
 
 
-    List<User> getSubscribedUsers(){
+    List<User> getSubscribedUsers() {
         List<User> userList = []
         subscriptions.each {
             userList.add(it.user)
@@ -58,7 +58,7 @@ class Topic {
     }
 
 
-    static List<TopicVO> getTrendingTopics(){
+    static List<TopicVO> getTrendingTopics() {
         List trendingTopics = Resource.createCriteria().list {
             projections {
                 createAlias('topic', 't')
@@ -68,7 +68,7 @@ class Topic {
                 count('t.id', 'count')
                 property('t.createdBy')
             }
-            eq('t.visibility',Visibility.PUBLIC)
+            eq('t.visibility', Visibility.PUBLIC)
             order('count', 'desc')
             order('t.name', 'asc')
             maxResults(2)
@@ -86,6 +86,6 @@ class Topic {
     public String toString() {
         return "Topic{" +
                 "name='" + name + '\'' +
-                '}';
+                '}'
     }
 }

@@ -3,12 +3,12 @@ package linksharingapp
 
 class LoginCheckInterceptor {
 
-    LoginCheckInterceptor(){
-        matchAll().excludes(controller:'login')
+    LoginCheckInterceptor() {
+        matchAll().excludes(controller: 'login')
     }
 
     boolean before() {
-        if (!session.user && controllerName !="resource") {
+        if (!session.user && controllerName != "resource") {
             redirect(controller: 'login', action: 'home')
         }
         true

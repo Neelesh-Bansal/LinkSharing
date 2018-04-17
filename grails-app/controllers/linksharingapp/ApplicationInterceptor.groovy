@@ -3,16 +3,15 @@ package linksharingapp
 
 class ApplicationInterceptor {
 
-    ApplicationInterceptor(){
+    ApplicationInterceptor() {
         matchAll().excludes(controllerName: 'resource')
     }
 
     boolean before() {
         log.error("Controller ${controllerName} , Action ${actionName}")
-        if(controllerName !="login" && !session.user)
-        {
+        if (controllerName != "login" && !session.user) {
             log.error("Unauthorized User.")
-            flash.error= "session.user doesn't exist"
+            flash.error = "session.user doesn't exist"
             return false
         }
         true

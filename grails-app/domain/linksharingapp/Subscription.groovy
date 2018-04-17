@@ -11,11 +11,11 @@ class Subscription {
     Date lastUpdated
 
 
-    static belongsTo = [user:User, topic:Topic]
+    static belongsTo = [user: User, topic: Topic]
 
     static constraints = {
 
-        user(nullable: false,unique: 'topic')
+        user(nullable: false, unique: 'topic')
         topic(nullable: false)
         seriousness(nullable: false)
     }

@@ -18,58 +18,41 @@ import linksharingapp.constants.DefaultPassword
 class BootStrap {
 
     def init = { servletContext ->
-//
-//        log.info("**********************************************")
-//        println(Holders.grailsApplication.config.server.contextPath)
-//
-//        if(User.count()==0) {
-//            createUsers()
-//        }
-//        createTopics()
-//
-//        if(Resource.count()==0) {
-//            createResources()
-//        }
-//        subscribeTopics()
-//        createReadingItems()
-//        createResourceRatings()
-//
-//
-//        ResourceSearchCO resourceSearchCO = new ResourceSearchCO(visibility: Visibility.PUBLIC)
-//        println("***************")
-//        Resource resource = Resource.get(5)
-//        println resource.totalVotes(resource)
-//        println resource.avgScore(resource)
-//        println resource.totalScore(resource)
-//        List topics = Topic.getTrendingTopics()
-//        topics.each {
-//            println it.id
-//            println it.visibility
-//            println it.name
-//            println it.createdBy
-//            println it.count
-//        }
+
+        log.info("**********************************************")
+
+        if(User.count()==0) {
+            createUsers()
+        }
+        createTopics()
+
+        if(Resource.count()==0) {
+            createResources()
+        }
+        subscribeTopics()
+        createReadingItems()
+        createResourceRatings()
+
+
 
     }
 
 
-
-    void createResourceRatings(){
+    void createResourceRatings() {
         //Add rating for all the unread reading items of the user
         List<User> users = User.findAll()
         users.each {
             User user = it
-            List<ReadingItem> readingItems = ReadingItem.findAllByIsReadAndUser(false,user)
+            List<ReadingItem> readingItems = ReadingItem.findAllByIsReadAndUser(false, user)
             readingItems.each {
                 Resource resource = it.resource
-                ResourceRating resourceRating = new ResourceRating(user: user,resource: resource,score: 3)
-                println(resourceRating.save())
+                new ResourceRating(user: user, resource: resource, score: 3)
             }
         }
 
     }
 
-    void createReadingItems(){
+    void createReadingItems() {
         List<User> users = User.getAll()
 
         users.each {
@@ -79,27 +62,28 @@ class BootStrap {
                 Topic topic = it
                 List<Resource> resources = Resource.findAllByTopic(topic)
                 resources.each {
-                    ReadingItem readingItem = new ReadingItem(resource: it,user: user,isRead: false)
-                    if(!ReadingItem.findByUserAndResource(user,it))//Reading item of resource should be created only if it does not already exit in users reading item
-                    println(readingItem.save())
+                    ReadingItem readingItem = new ReadingItem(resource: it, user: user, isRead: false)
+                    if (!ReadingItem.findByUserAndResource(user, it)) {
+//Reading item of resource should be created only if it does not already exit in users reading item
+                        readingItem.save()
+                    }
                 }
             }
         }
     }
 
 
-    void subscribeTopics(){
+    void subscribeTopics() {
         List<User> users = User.getAll()
         users.each {
             User user = it
             List<Topic> topics = Topic.findAllByCreatedByNotEqual(user)
             topics.each {
-                Subscription subscription = new Subscription(topic: it,user:user,seriousness: Seriousness.VERY_SERIOUS)
-                if(subscription.validate()){
+                Subscription subscription = new Subscription(topic: it, user: user, seriousness: Seriousness.VERY_SERIOUS)
+                if (subscription.validate()) {
                     subscription.save()
                     log.info("User Subscribed Succesfully for the topic which was not created by him/her - $subscription")
-                }
-                else {
+                } else {
                     log.error(subscription.errors.allErrors)
                 }
             }
@@ -108,40 +92,37 @@ class BootStrap {
 
     }
 
-    void createResources(){
+    void createResources() {
         List<Topic> topics = Topic.findAll()
         topics.each {
             Topic topic = it
             2.times {
                 //Creator of the resource should be same as creator of the topic-->createdBy: topic.createdBy
-                Resource linkResource = new LinkResource(url: "https://www.google.com",description: "Hello from ${topic.name}",createdBy: topic.createdBy,topic: topic)
-                Resource documentResource = new DocumentResource(filePath: "Document${it}", description: "Hello from ${topic.name}",createdBy: topic.createdBy,topic: topic)
-                println(linkResource.save())
-                if(documentResource.validate()){
+                //Resource linkResource = new LinkResource(url: "https://www.google.com", description: "Hello from ${topic.name}", createdBy: topic.createdBy, topic: topic)
+                Resource documentResource = new DocumentResource(filePath: "Document${it}", description: "Hello from ${topic.name}", createdBy: topic.createdBy, topic: topic)
+                if (documentResource.validate()) {
                     log.info("documentResource is valid- ${documentResource.validate()}")
-                    println(documentResource.save())
-                }
-                else {
+                    documentResource.save()
+                } else {
                     log.error(documentResource.hasErrors())
                 }
             }
         }
     }
 
-    void createTopics(){
+    void createTopics() {
         List<User> users = User.findAll()
         users.each {
-            if (!it.topics)
-            {
+            if (!it.topics) {
                 User user = it
                 5.times {
                     Topic topic = new Topic(name: "Topic${it}", visibility: Visibility.PUBLIC, createdby: user)
-                        user.addToTopics(topic)
-                        println(topic.save())
-                  }
+                    user.addToTopics(topic)
+                    topic.save()
                 }
             }
         }
+    }
 
     void createUsers() {
 
@@ -154,11 +135,10 @@ class BootStrap {
         admin.setUsername("neeleshbansal")
         admin.setActive(true)
         admin.setAdmin(true)
-        if(admin.validate()){
+        if (admin.validate()) {
             log.info("Admin is valid- ${admin.validate()}")
-            println(admin.save())
-        }
-        else {
+            admin.save()
+        } else {
             log.error(admin.hasErrors())
         }
 
@@ -172,15 +152,12 @@ class BootStrap {
         normal.setUsername("jsankalp")
         normal.setActive(true)
         normal.setAdmin(false)
-        if(normal.validate()){
-            println(normal.save())
-           // println(normal.save(failOnError : true,flush : true))
-        }
-        else {
+        if (normal.validate()) {
+            normal.save()
+        } else {
             log.info("user has errors while validating- ${admin.hasErrors()}")
         }
     }
-
 
 
     def destroy = {

@@ -3,15 +3,15 @@ package linksharingapp
 class UrlMappings {
 
     static mappings = {
-        "/$controller/$action?/$id?(.$format)?"{
+        "/$controller/$action?/$id?(.$format)?" {
             constraints {
                 // apply constraints here
             }
         }
 
-       // "/"(view:"/index")
+        // "/"(view:"/index")
         "/"(controller: 'login', action: 'home')
-        "500"(view:'/500')
-        "404"(view:'/404')
+        "500"(view: '/500')
+        "404"(view: '/404')
     }
 }

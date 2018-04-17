@@ -6,18 +6,13 @@ import grails.gorm.transactions.Transactional
 class LoginService {
 
 
-    User loginUser(String username, String password){
-        User user = User.findByUsernameAndPassword(username,password)
-        if(user){
-            println("In Login Service")
+    User loginUser(String username, String password) {
+        User user = User.findByUsernameAndPassword(username, password)
+        if (user) {
             return user
-        }
-        else{
+        } else {
             return null
         }
     }
 
-    def serviceMethod() {
-
-    }
 }

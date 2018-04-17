@@ -33,5 +33,5 @@ root(ERROR, ['STDOUT'])
 logger 'grails.app.controllers', INFO, ['STDOUT']
 logger 'grails.app.controllers', DEBUG, ['STDOUT']
 logger 'grails.app.controllers', WARN, ['STDOUT']
-logger 'grails.app.controllers',TRACE, ['STDOUT']
+logger 'grails.app.controllers', TRACE, ['STDOUT']
 logger 'grails.app.controllers', ERROR, ['STDOUT']

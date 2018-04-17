@@ -4,21 +4,26 @@
         <asset:image class="img-responsive" src="image.jpg" alt="neelesh"/>
         %{--<img src="${demo3.createdBy.photo}" name="photo" >--}%
     </div>
+
     <div class="col-lg-9">
         <div class="text-primary">
-            <a href="${createLink(controller: 'topic' ,action: 'show',id: demo3.id)}" >${demo3.name}</a>
+            <a href="${createLink(controller: 'topic', action: 'show', id: demo3.id)}">${demo3.name}</a>
         </div>
+
         <div class="col-lg-4" style="padding-left: 0px">
             <span class="text-muted">@${demo3.createdBy.username} 5min</span>
             <a href="#" class="hyperlink">Unsubscribe</a>
         </div>
+
         <div class="col-lg-4">
             <span class="text-muted">Subscriptions</span>
             <ls:subscriptionCount topicId="${demo3.id}"></ls:subscriptionCount>
             %{--<p class="text-primary">${demo3.topic}</p>--}%
         </div>
+
         <div class="col-lg-4">
             <span class="text-muted">Posts</span>
+
             <p class="text-primary">30</p>
         </div>
     </div>

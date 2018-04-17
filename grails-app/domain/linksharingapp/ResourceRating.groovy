@@ -10,8 +10,8 @@ class ResourceRating {
     static belongsTo = [user: User, resource: Resource]
 
     static constraints = {
-        resource(nullable: false,unique: 'user')//ResoureRating can be given by a user only one time for a resource
+        resource(nullable: false, unique: 'user')//ResoureRating can be given by a user only one time for a resource
         user(nullable: false)
-        score(nullable: false,min: 1, max: 5)
+        score(nullable: false, min: 1, max: 5)
     }
 }

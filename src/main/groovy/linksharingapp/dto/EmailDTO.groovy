@@ -7,7 +7,7 @@ class EmailDTO {
     String subject
     String content
     Integer linkId
-    List <String> itemList
-    List <String> createrList
+    List<String> itemList
+    List<String> createrList
 
 }

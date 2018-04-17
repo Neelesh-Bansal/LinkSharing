@@ -12,7 +12,7 @@ class ResourceSpec extends Specification implements DomainUnitTest<Resource> {
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == true
+        expect: "fix me"
+        true == true
     }
 }

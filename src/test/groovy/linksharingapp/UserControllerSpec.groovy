@@ -12,7 +12,7 @@ class UserControllerSpec extends Specification implements ControllerUnitTest<Use
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == true
+        expect: "fix me"
+        true == true
     }
 }

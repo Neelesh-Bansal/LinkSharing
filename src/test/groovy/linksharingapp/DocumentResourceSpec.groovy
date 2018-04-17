@@ -13,18 +13,18 @@ class DocumentResourceSpec extends Specification implements DomainUnitTest<Docum
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == true
+        expect: "fix me"
+        true == true
     }
 
-    def "validating toString method"(){
+    def "validating toString method"() {
 
         setup:
 
-        User user = new User(email: "neelesh@ttn.com",username: "neelesh.bansal",password: "abc123",firstName: "neelesh",lastName: "bansal")
-        Topic topic = new Topic(name: "Topic1",createdBy: user,visibility: Visibility.PUBLIC)
+        User user = new User(email: "neelesh@ttn.com", username: "neelesh.bansal", password: "abc123", firstName: "neelesh", lastName: "bansal")
+        Topic topic = new Topic(name: "Topic1", createdBy: user, visibility: Visibility.PUBLIC)
         when:
-        Resource documentResource = new DocumentResource(filePath: "Document1",description: 'Hello from Topic1',createdBy: user,topic: topic)
+        Resource documentResource = new DocumentResource(filePath: "Document1", description: 'Hello from Topic1', createdBy: user, topic: topic)
         documentResource.save()
 
         then:
@@ -32,7 +32,7 @@ class DocumentResourceSpec extends Specification implements DomainUnitTest<Docum
     }
 
 
-    void "Validating filePath"(){
+    void "Validating filePath"() {
         when:
         DocumentResource documentResource = new DocumentResource(filePath: "")
         boolean result = documentResource.validate()

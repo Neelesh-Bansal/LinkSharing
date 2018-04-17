@@ -4,6 +4,7 @@
     <meta name="layout" content="application">
     <title>That's a Fail... | Kyle W. Banks</title>
 </head>
+
 <body>
 <h2>Well, that's a fail...</h2>
 

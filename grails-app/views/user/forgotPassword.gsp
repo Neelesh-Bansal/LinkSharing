@@ -16,6 +16,7 @@
             <div>
                 <g:textField name="username" class="form-control form-register-field" placeholder="Username"/>
             </div>
+
             <div>
                 <g:textField name="email" class="form-control form-register-field" placeholder="Email"/>
             </div>

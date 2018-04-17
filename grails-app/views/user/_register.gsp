@@ -3,8 +3,9 @@
     <div class="panel-heading">
         Sign Up
     </div>
+
     <div class="panel-body">
-        <g:uploadForm url="[controller:'login', action:'register']" enctype="multipart/form-data" >
+        <g:uploadForm url="[controller: 'login', action: 'register']" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label class="control-label col-lg-4">First Name</label>
@@ -91,10 +92,10 @@
             </div>
 
             <div class="form-group">
-                 <div class="col-lg-8">
-        <label>Photo *</label>
-        <input class="form-control" type="file" name="photo" >
-                 </div>
+                <div class="col-lg-8">
+                    <label>Photo *</label>
+                    <input class="form-control" type="file" name="photo">
+                </div>
             </div>
 
             <g:submitButton name="button2" value="Submit"/>

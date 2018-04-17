@@ -3,7 +3,7 @@ package linksharingapp
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class SendMailServiceSpec extends Specification implements ServiceUnitTest<SendMailService>{
+class SendMailServiceSpec extends Specification implements ServiceUnitTest<SendMailService> {
 
     def setup() {
     }
@@ -12,7 +12,7 @@ class SendMailServiceSpec extends Specification implements ServiceUnitTest<SendM
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
+        expect: "fix me"
+        true == false
     }
 }

@@ -78,8 +78,7 @@ class LinksharingTagLib {
             User user = User.findByUsername(attrs.username)
             List<Subscription> subscriptions = Subscription.findAllByUser(user)
             out << body() << subscriptions.size()
-        }
-        else{
+        } else {
             User user = session.user
             List<Subscription> subscriptions = Subscription.findAllByUser(user)
             out << body() << subscriptions.size()
@@ -97,8 +96,7 @@ class LinksharingTagLib {
             List<Resource> resources1 = Resource.findAllByTopic(topic)
             //List<Resource> resources = Resource.findAllByTopic(attrs.topicId.toLong())
             out << body() << resources1.size()
-        }
-        else {
+        } else {
             User user = session.user
             List<Resource> resources1 = Resource.findAllByCreatedBy(user)
             out << body() << resources1.size()
@@ -114,10 +112,9 @@ class LinksharingTagLib {
     }
 
 
-    def showCurrentSeriousness = {attrs, body ->
+    def showCurrentSeriousness = { attrs, body ->
         Subscription subscription = Subscription.findByTopic(attrs.topic)
-        println(subscription.seriousness)
-        out<< body() << subscription.seriousness
+        out << body() << subscription.seriousness
     }
 
 }

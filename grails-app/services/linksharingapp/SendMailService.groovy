@@ -19,13 +19,11 @@ class SendMailService {
     }
 
 
-    def sendInvitation(EmailDTO emailDTO)
-    {
-        println("in email service")
+    def sendInvitation(EmailDTO emailDTO) {
         mailService.sendMail {
             to emailDTO.to
             subject emailDTO.subject
-            html view: '/email/_invite', model: [link: "${emailDTO.linkId}",email:"${emailDTO.to}"]
+            html view: '/email/_invite', model: [link: "${emailDTO.linkId}", email: "${emailDTO.to}"]
         }
     }
 

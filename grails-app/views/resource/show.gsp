@@ -25,8 +25,8 @@
                     <span class="pull-right">${resource.dateCreated}</span>
                     <br>
                     <span class="pull-right">
-                        <g:if test="${!session.user || session.user.getScore(resource)==1}">
-                            <g:form url="[controller: 'resourceRating',action: 'save', params: [id: resource.id]]">
+                        <g:if test="${!session.user || session.user.getScore(resource) == 1}">
+                            <g:form url="[controller: 'resourceRating', action: 'save', params: [id: resource.id]]">
                                 <g:select name="resource.rating" from="${1..5}" value="rating"></g:select>
                                 <g:submitButton name="vote"></g:submitButton>
                             </g:form>
@@ -66,7 +66,8 @@
                     </div>
 
                     <div class="col-lg-2">
-                        <a href="${createLink(controller: 'resource',action: 'delete', id: resource.id)}" class="text-primary" style="text-decoration: underline;">Delete</a>
+                        <a href="${createLink(controller: 'resource', action: 'delete', id: resource.id)}"
+                           class="text-primary" style="text-decoration: underline;">Delete</a>
                     </div>
 
                     <div class="col-lg-2">
@@ -74,7 +75,8 @@
                     </div>
 
                     <div class="col-lg-2">
-                        <a href="#" class="text-primary" style="text-decoration: underline;"><ls:checkRead resource="${resource}"></ls:checkRead></a>
+                        <a href="#" class="text-primary" style="text-decoration: underline;"><ls:checkRead
+                                resource="${resource}"></ls:checkRead></a>
                     </div>
 
                     <g:if test="${resourceType.equals("DocumentResource")}">
@@ -85,7 +87,8 @@
 
                     <g:if test="${resourceType.equals("LinkResource")}">
                         <div class="col-lg-2">
-                            <a href="${resource.url}" class="text-primary" target="_blank" style="text-decoration: underline;">View Full Site</a>
+                            <a href="${resource.url}" class="text-primary" target="_blank"
+                               style="text-decoration: underline;">View Full Site</a>
                         </div>
                     </g:if>
                 </div>

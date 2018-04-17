@@ -11,15 +11,14 @@
 //= require_self
 
 if (typeof jQuery !== 'undefined') {
-    (function($) {
-        $(document).ajaxStart(function() {
+    (function ($) {
+        $(document).ajaxStart(function () {
             $('#spinner').fadeIn();
-        }).ajaxStop(function() {
+        }).ajaxStop(function () {
             $('#spinner').fadeOut();
         });
     })(jQuery);
 }
-
 
 
 $(document).ready(function () {
@@ -31,10 +30,10 @@ $(document).ready(function () {
             data: {id: id},
             contentType: "application/json",
             success: function (response) {
-                if(response.success){
-                    $("#topic-"+id).remove();
+                if (response.success) {
+                    $("#topic-" + id).remove();
                     alert(response.success)
-                } else{
+                } else {
                     alert(response.error)
                 }
             }, error: function (e) {

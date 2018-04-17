@@ -3,7 +3,7 @@ package linksharingapp
 import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class UnreadItemServiceSpec extends Specification implements ServiceUnitTest<UnreadItemService>{
+class UnreadItemServiceSpec extends Specification implements ServiceUnitTest<UnreadItemService> {
 
     def setup() {
     }
@@ -12,7 +12,7 @@ class UnreadItemServiceSpec extends Specification implements ServiceUnitTest<Unr
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == false
+        expect: "fix me"
+        true == false
     }
 }

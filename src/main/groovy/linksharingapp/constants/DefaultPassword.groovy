@@ -1,5 +1,5 @@
 package linksharingapp.constants
 
 class DefaultPassword {
-    static final String defaultPassword="Admin123"
+    static final String defaultPassword = "Admin123"
 }

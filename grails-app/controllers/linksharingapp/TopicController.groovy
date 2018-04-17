@@ -1,7 +1,6 @@
 package linksharingapp
 
 import grails.converters.JSON
-import linksharingapp.co.ResourceSearchCO
 import linksharingapp.dto.EmailDTO
 import linksharingapp.enumeration.Visibility
 import linksharingapp.enumeration.Seriousness
@@ -10,20 +9,19 @@ class TopicController {
     def sendMailService
 
     def index() {}
-    def edit(){
+
+    def edit() {
         Topic.withNewTransaction {
             Long id = params.id.toLong()
             String name = params.topicname
             Topic.executeUpdate("update Topic set name=:name where id=:id", [name: name, id: id])
-            flash.message="Topic Edit Successfully"
+            flash.message = "Topic Edit Successfully"
             redirect(controller: 'user', action: 'index')
         }
     }
 
 //    def show(Long id) {
-//        println(id)
 //        Topic topic = Topic.read(id)
-//        println("Topic--${topic}")
 //        if (topic) {
 //            if (topic.visibility == Visibility.PUBLIC) {
 //                // render("Success")
@@ -68,14 +66,14 @@ class TopicController {
 
     def delete(Long id) {
         Topic topic = Topic.load(id)
-         Topic.withNewTransaction {
-             if (topic) {
-                 topic.delete()
-                 render([success: "Topic Deleted Successfully"] as JSON)
-             } else {
-                 render([error: "Topic Not Found"] as JSON)
-             }
-         }
+        Topic.withNewTransaction {
+            if (topic) {
+                topic.delete()
+                render([success: "Topic Deleted Successfully"] as JSON)
+            } else {
+                render([error: "Topic Not Found"] as JSON)
+            }
+        }
     }
 
 
@@ -120,7 +118,6 @@ class TopicController {
     }
 
 
-
     def invite() {
         Topic topic1 = Topic.findById(params.topic)
 
@@ -137,12 +134,10 @@ class TopicController {
         }
     }
 
-    def changeVisibility(){
+    def changeVisibility() {
         Topic topic = Topic.findById(params.id)
-        println("In Visibility change")
         Topic.withNewTransaction {
             if (topic) {
-                println("Inside Visibility change")
                 topic.visibility = params.visibility
                 topic.save()
                 flash.message = "Visibility Updated"

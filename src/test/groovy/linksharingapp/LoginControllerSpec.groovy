@@ -12,11 +12,11 @@ class LoginControllerSpec extends Specification implements ControllerUnitTest<Lo
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == true
+        expect: "fix me"
+        true == true
     }
 
-   def " index testing"(){
+    def " index testing"() {
         setup:
 
         when:
@@ -38,7 +38,7 @@ class LoginControllerSpec extends Specification implements ControllerUnitTest<Lo
 //        response.redirectedUrl == '/login/index'
 //    }
 
-    def "logout testing"(){
+    def "logout testing"() {
         when:
         controller.logout()
 

@@ -13,10 +13,10 @@ class LoginCheckInterceptorSpec extends Specification implements InterceptorUnit
     }
 
     void "Test loginCheck interceptor matching"() {
-        when:"A request matches the interceptor"
-            withRequest(controller:"loginCheck")
+        when: "A request matches the interceptor"
+        withRequest(controller: "loginCheck")
 
-        then:"The interceptor does match"
-            interceptor.doesMatch()
+        then: "The interceptor does match"
+        interceptor.doesMatch()
     }
 }

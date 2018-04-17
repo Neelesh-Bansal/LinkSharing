@@ -4,6 +4,7 @@
     <div class="panel-heading">
         UserList
     </div>
+
     <div class="panel-body">
         <g:render template="allUsers" var="user1" collection="${user1}"></g:render>
     </div>

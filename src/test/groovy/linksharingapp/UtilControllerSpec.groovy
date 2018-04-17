@@ -12,7 +12,7 @@ class UtilControllerSpec extends Specification implements ControllerUnitTest<Uti
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == true
+        expect: "fix me"
+        true == true
     }
 }

@@ -1,8 +1,8 @@
 <html>
 <head>
-     <asset:stylesheet src="header.css"/>
+    <asset:stylesheet src="header.css"/>
     <asset:stylesheet href="application.css"/>
-     <asset:javascript src="application.js?compile=false"/>
+    <asset:javascript src="application.js?compile=false"/>
     <script>
         function startTime() {
             var today = new Date();
@@ -15,27 +15,33 @@
                 h + ":" + m + ":" + s;
             var t = setTimeout(startTime, 500);
         }
+
         function checkTime(i) {
-            if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+            if (i < 10) {
+                i = "0" + i
+            }
+            ;  // add zero in front of numbers < 10
             return i;
         }
     </script>
 </head>
+
 <body onload="startTime()">
 <div id="txt"></div>
+
 <body>
 <g:if test="${!session.user}">
-  <div class="page-header well" style="margin-top: 0px">
-    <span>
-        <a class="text-primary" href="#" style="text-decoration: underline">Link Sharing</a>
-    </span>
-      <g:form class="search" url="[controller:'resource',action:'search']">
+    <div class="page-header well" style="margin-top: 0px">
+        <span>
+            <a class="text-primary" href="#" style="text-decoration: underline">Link Sharing</a>
+        </span>
+        <g:form class="search" url="[controller: 'resource', action: 'search']">
 
-          <span><i class="fa fa-search"></i></span>
-          <input id="inputSearch" placeholder="Search" name="key">
-          <span><i class=" fa fa-times"></i></span>
-      </g:form>
-  </div>
+            <span><i class="fa fa-search"></i></span>
+            <input id="inputSearch" placeholder="Search" name="key">
+            <span><i class=" fa fa-times"></i></span>
+        </g:form>
+    </div>
 </g:if>
 <g:else>
     <header class="page-header well" style="padding-bottom: 50px ; margin-top: 0px">
@@ -46,9 +52,10 @@
 
             </span>
         </div>
+
         <div class="col-lg-7">
             <div class="col-lg-5">
-                <g:form class="search" url="[controller:'resource',action:'search']">
+                <g:form class="search" url="[controller: 'resource', action: 'search']">
 
                     <span><i class="fa fa-search"></i></span>
                     <input id="inputSearch" placeholder="Search" name="key">
@@ -104,9 +111,9 @@
                 </button>
                 <ul class="dropdown-menu">
                     <g:if test="${session.user.admin}">
-                        <li><g:link controller="admin" action="userList">View All Users</g:link> </li>
+                        <li><g:link controller="admin" action="userList">View All Users</g:link></li>
                     </g:if>
-                    <li><g:link controller="user" action="profile">Edit Profile</g:link> </li>
+                    <li><g:link controller="user" action="profile">Edit Profile</g:link></li>
                     <li><g:link controller="login" action="logout">Logout</g:link></li>
                 </ul>
             </span>

@@ -12,44 +12,44 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
     }
 
     void "test something"() {
-        expect:"fix me"
-            true == true
+        expect: "fix me"
+        true == true
     }
 
     //Write test cases for validating user (including username and email uniqueness)
 
-   void "validating user constraints"(){
+    void "validating user constraints"() {
         setup:
-        User user = new User(email: email,username: uname,password: pass,confirmPassword: pass, firstName: fname,lastName: lname,photo: photo,admin: admin,active: active)
+        User user = new User(email: email, username: uname, password: pass, confirmPassword: pass, firstName: fname, lastName: lname, photo: photo, admin: admin, active: active)
         when:
         Boolean result = user.validate()
         then:
         result == value
 
         where:
-        email                    | uname        | pass       | fname       | lname    | photo | admin | active | value
-        "neelesh@tothenew.com"   |"neelesh"     |"abc123"    |"neelesh"    | "bansal" | 1     | true  | true   |  true
+        email                  | uname     | pass     | fname     | lname    | photo | admin | active | value
+        "neelesh@tothenew.com" | "neelesh" | "abc123" | "neelesh" | "bansal" | 1     | true  | true   | true
         //Email
-        "neelesh@tothenew"       |"neelesh"     |"abc123"    |"neelesh"    | "bansal" | 1     | true  | true   |  false
-        null                     |"neelesh"     |"abc123"    |"neelesh"    | "bansal" | 1     | true  | true   |  false
+        "neelesh@tothenew"     | "neelesh" | "abc123" | "neelesh" | "bansal" | 1     | true  | true   | false
+        null                   | "neelesh" | "abc123" | "neelesh" | "bansal" | 1     | true  | true   | false
         //password
-        "neelesh@tothenew.com"   |"neelesh"     |"abc"       |"neelesh"    | "bansal" | 1     | true  | true   |  false
-        "neelesh@tothenew.com"   |"neelesh"     |""          |"neelesh"    | "bansal" | 1     | true  | true   |  false
+        "neelesh@tothenew.com" | "neelesh" | "abc"    | "neelesh" | "bansal" | 1     | true  | true   | false
+        "neelesh@tothenew.com" | "neelesh" | ""       | "neelesh" | "bansal" | 1     | true  | true   | false
         //firstname
-        "neelesh@tothenew.com"   |"neelesh"     |"abc123"    |""           | "bansal" | 1     | true  | true   |  false
-        "neelesh@tothenew.com"   |"neelesh"     |"abc123"    |null         | "bansal" | 1     | true  | true   |  false
+        "neelesh@tothenew.com" | "neelesh" | "abc123" | ""        | "bansal" | 1     | true  | true   | false
+        "neelesh@tothenew.com" | "neelesh" | "abc123" | null      | "bansal" | 1     | true  | true   | false
         //lastname
-        "neelesh@tothenew.com"   |"neelesh"     |"abc123"    |"neelesh"    | ""       | 1     | true  | true   |  false
-        "neelesh@tothenew.com"   |"neelesh"     |"abc123"    |"neelesh"    | null     | 1     | true  | true   |  false
+        "neelesh@tothenew.com" | "neelesh" | "abc123" | "neelesh" | ""       | 1     | true  | true   | false
+        "neelesh@tothenew.com" | "neelesh" | "abc123" | "neelesh" | null     | 1     | true  | true   | false
         //photo
-        "neelesh@tothenew.com"   |"neelesh"     |"abc123"    |"neelesh"    | "bansal" | 0     | true  | true   |  true
+        "neelesh@tothenew.com" | "neelesh" | "abc123" | "neelesh" | "bansal" | 0     | true  | true   | true
         //admin
-        "neelesh@tothenew.com"   |"neelesh"     |"abc123"    |"neelesh"    | "bansal" | 1     | false  | true   |  true
+        "neelesh@tothenew.com" | "neelesh" | "abc123" | "neelesh" | "bansal" | 1     | false | true   | true
         //active
-        "neelesh@tothenew.com"   |"neelesh"     |"abc123"    |"neelesh"    | "bansal" | 1     | true  | false   |  true
+        "neelesh@tothenew.com" | "neelesh" | "abc123" | "neelesh" | "bansal" | 1     | true  | false  | true
     }
 
-    void "validating uniqueness of email"(){
+    void "validating uniqueness of email"() {
         setup:
         User user = new User()
         user.setEmail("neelesh@gmail.com")
@@ -102,11 +102,11 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
         user2.count() == 1
     }
 
-    def "validating toString method"(){
+    def "validating toString method"() {
 
         setup:
 
-        User user = new User(email: "neelesh@ttn.com",username: "neelesh.bansal",password: "abc123",confirmPassword: "abc123", firstName: "neelesh",lastName: "bansal")
+        User user = new User(email: "neelesh@ttn.com", username: "neelesh.bansal", password: "abc123", confirmPassword: "abc123", firstName: "neelesh", lastName: "bansal")
 
         when:
         user.save()
@@ -116,9 +116,9 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
     }
 
 
-    void "validating name"(){
+    void "validating name"() {
         setup:
-        User user1 = new User(email: "neelesh@ttn.com",username: "neelesh.bansal",password: "abc123",confirmPassword: "abc123",firstName: "neelesh",lastName: "bansal")
+        User user1 = new User(email: "neelesh@ttn.com", username: "neelesh.bansal", password: "abc123", confirmPassword: "abc123", firstName: "neelesh", lastName: "bansal")
 
         when:
         user1.save()
@@ -126,4 +126,4 @@ class UserSpec extends Specification implements DomainUnitTest<User> {
         then:
         user1.getName() == "neelesh bansal"
     }
-  }
+}

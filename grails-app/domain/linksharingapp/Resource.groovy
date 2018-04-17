@@ -13,9 +13,9 @@ abstract class Resource {
 
     RatingInfoVO ratingInfoVO
 
-    static belongsTo = [createdBy:User, topic:Topic]
+    static belongsTo = [createdBy: User, topic: Topic]
 
-    static hasMany = [ratings:ResourceRating, readingItems:ReadingItem]
+    static hasMany = [ratings: ResourceRating, readingItems: ReadingItem]
 
     static constraints = {
         description(type: 'text')
@@ -27,7 +27,7 @@ abstract class Resource {
     static transients = ['ratingInfoVO']
 
     static namedQueries = {
-        search {ResourceSearchCO resourceSearchCO ->
+        search { ResourceSearchCO resourceSearchCO ->
             if (resourceSearchCO.topicId)
                 eq('topic.id', resourceSearchCO.topicId)
 //            if (resourceSearchCO.visibility)
@@ -36,7 +36,7 @@ abstract class Resource {
     }
 
     Integer totalVotes(Resource resource) {
-        Integer votes = ResourceRating.createCriteria().count(){
+        Integer votes = ResourceRating.createCriteria().count() {
 
             eq("resource", resource)
         }
@@ -45,7 +45,7 @@ abstract class Resource {
     }
 
     Double avgScore(Resource resource) {
-        def averageScore = ResourceRating.createCriteria().get{
+        def averageScore = ResourceRating.createCriteria().get {
             projections {
                 avg('score')
             }
@@ -57,7 +57,7 @@ abstract class Resource {
     }
 
     Integer totalScore(Resource resource) {
-        def score = ResourceRating.createCriteria().get(){
+        def score = ResourceRating.createCriteria().get() {
 
             projections {
                 sum('score')
@@ -68,16 +68,16 @@ abstract class Resource {
         return score
     }
 
-        RatingInfoVO setRatingInfoVO(Resource resource) {
-            RatingInfoVO ratingInfoVO = new RatingInfoVO()
-            ratingInfoVO.totalVotes = totalVotes(resource)
-            ratingInfoVO.averageScore = avgScore(resource)
-            ratingInfoVO.totalScore = totalScore(resource)
-            return ratingInfoVO
+    RatingInfoVO setRatingInfoVO(Resource resource) {
+        RatingInfoVO ratingInfoVO = new RatingInfoVO()
+        ratingInfoVO.totalVotes = totalVotes(resource)
+        ratingInfoVO.averageScore = avgScore(resource)
+        ratingInfoVO.totalScore = totalScore(resource)
+        return ratingInfoVO
     }
 
 
-    static List<Resource> topPost(){
+    static List<Resource> topPost() {
         List resources = ResourceRating.createCriteria().list {
             projections {
                 property('resource.id')
@@ -92,8 +92,7 @@ abstract class Resource {
     }
 
 
-
-    static List<Resource> recentShares(){
+    static List<Resource> recentShares() {
 
         List results = Resource.createCriteria().list {
             order("dateCreated", "desc")
@@ -104,24 +103,21 @@ abstract class Resource {
     }
 
 
-    static String findTypeOfResource(Long id){
+    static String findTypeOfResource(Long id) {
         Resource resource = Resource.findById(id)
-        if(resource.class == LinkResource.class){
+        if (resource.class == LinkResource.class) {
             return "LinkResource"
-        }
-        else if(resource.class == DocumentResource.class){
+        } else if (resource.class == DocumentResource.class) {
             return "DocumentResource"
-        }
-        else{
+        } else {
             return false
         }
     }
 
-    Boolean canViewBy(User user){
-        if (this.topic.canViewedBy(user)){
+    Boolean canViewBy(User user) {
+        if (this.topic.canViewedBy(user)) {
             return true
-        }
-        else {
+        } else {
             return false
         }
     }

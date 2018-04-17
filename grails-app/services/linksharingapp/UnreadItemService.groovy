@@ -14,7 +14,7 @@ class UnreadItemService {
 
         List<User> userList = User.findAll()
         List<String> topicName = []
-        List<String> createdBy =[]
+        List<String> createdBy = []
 
         userList.each { user ->
             List<ReadingItem> readingItemList = ReadingItem.findAllByUserAndIsRead(user, false)
@@ -25,20 +25,20 @@ class UnreadItemService {
                 createdBy.add(list.createdBy.getName())
             }
 
-            EmailDTO emailDTO = new EmailDTO(to: user.email, subject: "Unread Resources", itemList: topicName, createrList:createdBy )
+            EmailDTO emailDTO = new EmailDTO(to: user.email, subject: "Unread Resources", itemList: topicName, createrList: createdBy)
 
             sendMailService.sendUnreadResourcesEmail(emailDTO)
 
 
             topicName = []
-            createdBy=[]
+            createdBy = []
 
         }
     }
 
     def inbox(User user) {
 
-        List result=[]
+        List result = []
 
         List<ReadingItem> readingItemList = ReadingItem.findAllByUserAndIsRead(user, false)
 

@@ -4,6 +4,7 @@
     <meta name="layout" content="application">
     <title>That's a Fail...Server Internal Error | Kyle W. Banks</title>
 </head>
+
 <body>
 <h2>500 Error Found</h2>
 

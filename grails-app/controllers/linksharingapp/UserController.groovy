@@ -1,26 +1,25 @@
 package linksharingapp
 
 import linksharingapp.co.SearchCO
-import linksharingapp.enumeration.Visibility
 import linksharingapp.vo.TopicVO
 
 class UserController {
 
     def assetResourceLocator
     UserService userService
+
     def index() {
-        if(session.user) {
+        if (session.user) {
             List<TopicVO> topicVOList = Topic.getTrendingTopics()
             User user = User.findById(session.user.id)
-            def max = params.max?:5
-            def offset = params.offset?:0
-            def unReadItems = ReadingItem.createCriteria().list(max: max,offset: offset){
-                eq("user",user)
+            def max = params.max ?: 5
+            def offset = params.offset ?: 0
+            def unReadItems = ReadingItem.createCriteria().list(max: max, offset: offset) {
+                eq("user", user)
             }
-            render(view: '/user/dashboard', model: [topicList: topicVOList,unReadItems:unReadItems,total:unReadItems.getTotalCount()])
+            render(view: '/user/dashboard', model: [topicList: topicVOList, unReadItems: unReadItems, total: unReadItems.getTotalCount()])
 
-        }
-        else{
+        } else {
             flash.error = "Login to continue"
             render(controller: 'login', action: 'index')
         }
@@ -28,52 +27,47 @@ class UserController {
 //        render (session?.user?.username)
     }
 
-
-
-
     //used in canDeleteResource taglib
-    def canDeleteResource(){
-
-    }
+//    def canDeleteResource() {
+//
+//    }
 
     //used for retrieving user profile
-    def profile(){
+    def profile() {
         User user = User.find(session.user)
-        render(view: '/user/profile', model: [user:user])
+        render(view: '/user/profile', model: [user: user])
     }
 
     //used for updating current session user profile
-    def update(String fname,String lname, String uname){
-        println("Inside profile update-->")
+    def update(String fname, String lname, String uname) {
         User.withNewTransaction {
-                User user = session.user
-                Long id = user.id
-                User.executeUpdate("update User set firstName=:fname,lastName=:lname,username=:uname where id=:id", [fname: fname,lname:lname,uname:uname, id: id])
-                session.user = User.findById(id)
-                flash.message="Profile Edit successfully"
-                redirect(controller: 'user',action: 'index')
-            }
+            User user = session.user
+            Long id = user.id
+            User.executeUpdate("update User set firstName=:fname,lastName=:lname,username=:uname where id=:id", [fname: fname, lname: lname, uname: uname, id: id])
+            session.user = User.findById(id)
+            flash.message = "Profile Edit successfully"
+            redirect(controller: 'user', action: 'index')
+        }
     }
 
     //used for updating current session user password
-    def changePassword(String pass1, String pass2){
+    def changePassword(String pass1, String pass2) {
         User.withNewTransaction {
             if (pass1.equals(pass2)) {
                 User user = User.find(session.user)
                 Long id = user.id
                 User.executeUpdate("update User set password=:pass where id=:id", [pass: pass1, id: id])
-                flash.message="Password Changed successfully"
-                redirect(controller: 'user',action: 'index')
-            }
-            else{
-                flash.error="password not matching"
-                redirect(controller: 'user',action: 'index')
+                flash.message = "Password Changed successfully"
+                redirect(controller: 'user', action: 'index')
+            } else {
+                flash.error = "password not matching"
+                redirect(controller: 'user', action: 'index')
             }
         }
     }
 
 
-    def show(){
+    def show() {
         SearchCO searchCO = new SearchCO()
         searchCO.setQ("Topic0")
         searchCO.setMax(10)
@@ -82,29 +76,28 @@ class UserController {
 
     }
 
-    Boolean isSubscribed(Long topicId){
+    Boolean isSubscribed(Long topicId) {
         Topic topic = Topic.findById(topicId)
-        Integer count = Subscription.createCriteria().count{
-            eq('user',this)
-            eq('topic',topic)
+        Integer count = Subscription.createCriteria().count {
+            eq('user', this)
+            eq('topic', topic)
         }
-        if(count){
+        if (count) {
             return true
-        }
-        else {
+        } else {
             return false
         }
     }
 
 
-
-    def fetchUserImage(){
+    def fetchUserImage() {
         User user = User.findByUsername(params.username)
         byte[] photo
-        if(!user?.photo){
+        if (!user?.photo) {
             photo = assetResourceLocator.findAssetForURI('image.jpg').byteArray
-        }else {
-            photo= user.photo
+        }
+        else {
+            photo = user.photo
         }
         OutputStream out = response.getOutputStream()
         out.write(photo)
@@ -112,15 +105,14 @@ class UserController {
         out.close()
     }
 
-    def state(){
+    def state() {
         params.id
-        if(userService.changeState(new Integer(params.id))){
+        if (userService.changeState(new Integer(params.id))) {
             flash.message = "state changed"
-            redirect(controller: 'user',action: 'index')
-        }
-        else{
+            redirect(controller: 'user', action: 'index')
+        } else {
             flash.error = "state not changed"
-            redirect(controller: 'user',action: 'index')
+            redirect(controller: 'user', action: 'index')
         }
     }
 

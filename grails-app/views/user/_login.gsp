@@ -1,8 +1,9 @@
 %{--calling from login/index--}%
 <div class="panel panel-default">
-    <div class="panel-heading" >
+    <div class="panel-heading">
         Login
     </div>
+
     <div class="panel-body">
         <g:if test="${flash.error}">
             <g:message message="${flash.error}"></g:message>

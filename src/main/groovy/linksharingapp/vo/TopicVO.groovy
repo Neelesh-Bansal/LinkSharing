@@ -20,6 +20,6 @@ class TopicVO {
                 ", visibility=" + visibility +
                 ", count=" + count +
                 ", createdBy=" + createdBy +
-                '}';
+                '}'
     }
 }
