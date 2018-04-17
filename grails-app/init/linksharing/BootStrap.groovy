@@ -97,10 +97,10 @@ class BootStrap {
         topics.each {
             Topic topic = it
             2.times {
-                //Creator of the resource should be same as creator of the topic-->createdBy: topic.createdBy
-                //Resource linkResource = new LinkResource(url: "https://www.google.com", description: "Hello from ${topic.name}", createdBy: topic.createdBy, topic: topic)
+                Resource linkResource = new LinkResource(url: "https://www.google.com", description: "Hello from ${topic.name}", createdBy: topic.createdBy, topic: topic)
                 Resource documentResource = new DocumentResource(filePath: "Document${it}", description: "Hello from ${topic.name}", createdBy: topic.createdBy, topic: topic)
                 if (documentResource.validate()) {
+                    linkResource.save()
                     log.info("documentResource is valid- ${documentResource.validate()}")
                     documentResource.save()
                 } else {
